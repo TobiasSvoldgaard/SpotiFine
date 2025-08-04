@@ -126,9 +126,20 @@ export default function Home() {
           <p className="text-neutral-400">
             If you&apos;re ready to view your data, please click the button
             below to proceed. Don&apos;t worry, your data is processed locally,
-            and entirely in your browser, and is never stored or shared anywhere
+            entirely in your browser, and is never stored or shared anywhere
             else.
           </p>
+          {/* 
+          Total songs listened to
+          Hours listened
+          Top artists
+          Top tracks
+          Song per month
+          Most active day
+          Most active hour
+          Top genres
+          Podcasts?
+          */}
         </div>
         <div className="sideColumn">
           <br />
