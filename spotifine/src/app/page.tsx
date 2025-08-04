@@ -47,7 +47,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold">
             Step 3 - Explore your listening habits
           </h1>
-          <p>
+          <p className="text-neutral-400">
             If you&apos;re ready to view your data, please click the button
             below to proceed. Don&apos;t worry, your data is processed locally,
             and entirely in your browser, and is never stored or shared anywhere
