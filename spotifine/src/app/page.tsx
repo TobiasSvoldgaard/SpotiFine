@@ -15,10 +15,17 @@ export default function Home() {
       const files = e.dataTransfer?.files;
       const file = files?.[0];
 
-      if (file) {
-        setFileUploadName(file.name);
-        setFileUploadSize(file.size / 1000000);
+      if (!file) {
+        return;
       }
+
+      if (!file.name.toLowerCase().endsWith(".zip")) {
+        alert("Forbidden file format");
+        return;
+      }
+
+      setFileUploadName(file.name);
+      setFileUploadSize(file.size / 1000000);
 
       fileDropZone?.classList.remove("bg-[#393939]");
     };
@@ -94,10 +101,18 @@ export default function Home() {
               accept=".zip"
               onChange={(e) => {
                 const file = e.target.files?.[0];
-                if (file) {
-                  setFileUploadName(file.name);
-                  setFileUploadSize(file.size / 1000000);
+
+                if (!file) {
+                  return;
                 }
+
+                if (!file.name.toLowerCase().endsWith(".zip")) {
+                  alert("Forbidden file format");
+                  return;
+                }
+
+                setFileUploadName(file.name);
+                setFileUploadSize(file.size / 1000000);
               }}
             />
           </div>
