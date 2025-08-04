@@ -1,4 +1,52 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function Home() {
+  const [fileUploadName, setFileUploadName] = useState("");
+  const [fileUploadSize, setFileUploadSize] = useState(0);
+
+  useEffect(() => {
+    const fileDropZone = document.getElementById("fileDropZone");
+
+    const handleFileDrop = (e: DragEvent) => {
+      e.preventDefault();
+
+      const files = e.dataTransfer?.files;
+      const file = files?.[0];
+
+      if (file) {
+        setFileUploadName(file.name);
+        setFileUploadSize(file.size / 1000000);
+      }
+
+      fileDropZone?.classList.remove("bg-[#393939]");
+    };
+
+    fileDropZone?.addEventListener("dragenter", (e) => {
+      e.preventDefault();
+      fileDropZone.classList.add("bg-[#393939]");
+    });
+
+    fileDropZone?.addEventListener("dragleave", (e) => {
+      e.preventDefault();
+      fileDropZone.classList.remove("bg-[#393939]");
+    });
+
+    fileDropZone?.addEventListener("dragover", (e) => {
+      e.preventDefault();
+    });
+
+    fileDropZone?.addEventListener("drop", handleFileDrop);
+
+    return () => {
+      fileDropZone?.removeEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+      fileDropZone?.removeEventListener("drop", handleFileDrop);
+    };
+  });
+
   return (
     <>
       <div className="row">
@@ -25,7 +73,10 @@ export default function Home() {
             below.
           </p>
           <br />
-          <div className="fileDropZone rounded-2xl border-2 border-dashed border-neutral-400">
+          <div
+            className="fileDropZone rounded-2xl border-2 border-dashed border-neutral-400"
+            id="fileDropZone"
+          >
             <p>Drag and drop your file here</p>
             <br />
             <p>or</p>
@@ -41,8 +92,18 @@ export default function Home() {
               name="fileUpload"
               id="fileUpload"
               accept=".zip"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  setFileUploadName(file.name);
+                  setFileUploadSize(file.size / 1000000);
+                }
+              }}
             />
           </div>
+          {fileUploadName !== "" && fileUploadSize !== 0 && (
+            <p>{fileUploadName + " " + fileUploadSize.toFixed(2) + " MB"}</p>
+          )}
           <br />
           <h1 className="text-2xl font-bold">
             Step 3 - Explore your listening habits
