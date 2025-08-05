@@ -2,13 +2,9 @@ import { JSX } from "react";
 
 type Props = {
   songsByHour: number[];
-  totalSongsPlayed: number;
 };
 
-export default function SongsByHour({
-  songsByHour,
-  totalSongsPlayed,
-}: Props): JSX.Element {
+export default function SongsByHour({ songsByHour }: Props): JSX.Element {
   const mostPlays = Math.max(...songsByHour);
   const hours = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
@@ -22,7 +18,11 @@ export default function SongsByHour({
         <br />
         <div className="flex gap-1 w-full">
           {hours.map((hour) => (
-            <div key={hour} className="flex-1 flex flex-col items-center">
+            <div
+              key={hour}
+              className="flex-1 flex flex-col items-center"
+              style={{ minWidth: "8px", flex: "1 1 0" }}
+            >
               <div className="h-50 w-full flex items-end">
                 <div
                   className="w-full bg-white rounded-sm"

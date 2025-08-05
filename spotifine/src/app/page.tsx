@@ -207,9 +207,7 @@ export default function Home() {
                       songsByDay={statistics.songsByDay}
                       totalSongsPlayed={statistics.totalSongsPlayed}
                     />
-                    <SongsByHour
-                      songsByHour={statistics.songsByHour}
-                      totalSongsPlayed={statistics.totalSongsPlayed}
+                    <SongsByHour songsByHour={statistics.songsByHour} />
                     <MostSkippedSongs
                       mostSkippedSongs={statistics.mostSkippedSongs}
                     />
