@@ -136,6 +136,69 @@ export default function Home() {
                   handleDataSubmission();
                 }
               }}
+            >
+              View data
+            </button>
+          </div>
+          <br />
+          {statistics !== null && (
+            <>
+              {statistics.totalSongsPlayed > 0 && (
+                <>
+                  <h1 className="text-2xl font-bold">Music</h1>
+                  <div className="grid grid-cols-2 gap-4">
+                    <MusicOverview
+                      totalSongsPlayed={statistics.totalSongsPlayed}
+                      totalSongListeningTime={statistics.totalSongListeningTime}
+                      mostPlayedSong={statistics.mostPlayedSongs[0]}
+                    />
+                    <TopSongs mostPlayedSongs={statistics.mostPlayedSongs} />
+                    <TopArtists
+                      mostPlayedArtists={statistics.mostPlayedArtists}
+                    />
+                    <TopAlbums mostPlayedAlbums={statistics.mostPlayedAlbums} />
+                  </div>
+                </>
+              )}
+              <br />
+              {statistics.totalPodcastEpisodesPlayed > 0 && (
+                <>
+                  <h1 className="text-2xl font-bold">Podcasts</h1>
+                  <div className="flex gap-4">
+                    <PodcastsOverview
+                      totalPodcastEpisodesPlayed={
+                        statistics.totalPodcastEpisodesPlayed
+                      }
+                      totalPodcastListeningTime={
+                        statistics.totalPodcastListeningTime
+                      }
+                      mostPlayedPodcastName={
+                        statistics.mostPlayedPodcasts[0].name
+                      }
+                    />
+                    <TopPodcasts
+                      mostPlayedPodcasts={statistics.mostPlayedPodcasts}
+                    />
+                  </div>
+                </>
+              )}
+              <br />
+              {statistics.totalAudiobooksPlayed > 0 && (
+                <>
+                  <h1 className="text-2xl font-bold">Audiobooks</h1>
+                  <p>
+                    {"You've listened to " +
+                      statistics.totalAudiobooksPlayed +
+                      " audiobooks. That's " +
+                      (
+                        statistics.totalAudiobookListeningTime / 3600000
+                      ).toFixed(2) +
+                      " hours."}
+                  </p>
+                </>
+              )}
+            </>
+          )}
           {/* 
           Total songs listened to
           Hours listened
