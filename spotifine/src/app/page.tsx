@@ -90,6 +90,7 @@ export default function Home() {
             <br />
             <label
               className="bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer px-8 py-4 rounded-lg"
+              className="bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer px-8 py-4 rounded-lg select-none"
               htmlFor="fileUpload"
             >
               Choose file
@@ -129,6 +130,7 @@ export default function Home() {
             entirely in your browser, and is never stored or shared anywhere
             else.
           </p>
+              } px-8 py-4 rounded-lg select-none`}
           {/* 
           Total songs listened to
           Hours listened
