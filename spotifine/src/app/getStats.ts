@@ -80,21 +80,14 @@ export default async function getStats(userData: File): Promise<statistics> {
     })
   );
 
-  let totalSongListeningTime = 0;
-  let totalPodcastListeningTime = 0;
-  let totalAudiobookListeningTime = 0;
-
-  for (const song of songListeningHistory) {
-    totalSongListeningTime += song.ms_played;
-  }
-
-  for (const episode of podcastListeningHistory) {
-    totalPodcastListeningTime += episode.ms_played;
-  }
-
-  for (const audiobook of audiobookListeningHistory) {
-    totalAudiobookListeningTime += audiobook.ms_played;
-  }
+  // Get total listening time for songs, podcasts, and audiobooks.
+  const totalSongListeningTime = getTotalListeningTime(songListeningHistory);
+  const totalPodcastListeningTime = getTotalListeningTime(
+    podcastListeningHistory
+  );
+  const totalAudiobookListeningTime = getTotalListeningTime(
+    audiobookListeningHistory
+  );
 
   for (const song of songListeningHistory) {
     // Initialise song/artist/album if not present in the maps.
@@ -132,14 +125,6 @@ export default async function getStats(userData: File): Promise<statistics> {
     )!.timesPlayed += 1;
   }
 
-  const mostPlayedSongs = Array.from(mostPlayedSongsMap.values());
-  const mostPlayedArtists = Array.from(mostPlayedArtistMap.values());
-  const mostPlayedAlbums = Array.from(mostPlayedAlbumsMap.values());
-
-  mostPlayedSongs.sort((a, b) => b.timesPlayed - a.timesPlayed);
-  mostPlayedArtists.sort((a, b) => b.timesPlayed - a.timesPlayed);
-  mostPlayedAlbums.sort((a, b) => b.timesPlayed - a.timesPlayed);
-
   for (const episode of podcastListeningHistory) {
     // Initialise podcast if not present in the map.
     if (!mostPlayedPodcastsMap.has(episode.episode_show_name)) {
@@ -153,8 +138,15 @@ export default async function getStats(userData: File): Promise<statistics> {
     mostPlayedPodcastsMap.get(episode.episode_show_name)!.timesPlayed += 1;
   }
 
+  // Convert maps to arrays.
+  const mostPlayedSongs = Array.from(mostPlayedSongsMap.values());
+  const mostPlayedArtists = Array.from(mostPlayedArtistMap.values());
+  const mostPlayedAlbums = Array.from(mostPlayedAlbumsMap.values());
   const mostPlayedPodcasts = Array.from(mostPlayedPodcastsMap.values());
 
+  mostPlayedSongs.sort((a, b) => b.timesPlayed - a.timesPlayed);
+  mostPlayedArtists.sort((a, b) => b.timesPlayed - a.timesPlayed);
+  mostPlayedAlbums.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedPodcasts.sort((a, b) => b.timesPlayed - a.timesPlayed);
 
   return {
@@ -169,4 +161,12 @@ export default async function getStats(userData: File): Promise<statistics> {
     mostPlayedAlbums,
     mostPlayedPodcasts,
   };
+}
+
+function getTotalListeningTime(listeningHistory: media[]) {
+  let time = 0;
+  for (const item of listeningHistory) {
+    time += item.ms_played;
+  }
+  return time;
 }
