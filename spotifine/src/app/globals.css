@@ -4,6 +4,11 @@ body {
   background: #0d0d0d;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-color: white #0f9516;
+  scrollbar-width: thin;
+  padding-bottom: 50vh;
 }
 
 .fileDropZone {
