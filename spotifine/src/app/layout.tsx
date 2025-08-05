@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Spotifine",
+  title: "SpotiFine",
   description: "A simple way to explore your Spotify data",
 };
 

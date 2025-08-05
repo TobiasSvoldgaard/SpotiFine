@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { statistics } from "./utils/types";
 import getStats from "./utils/getStats";
 import TopPodcasts from "./components/TopPodcasts";
@@ -83,6 +84,17 @@ export default function Home() {
           <br />
         </div>
         <div className="centerColumn px-32">
+          <header className="flex item-center text-end my-8">
+            <Image
+              className="cursor-pointer"
+              onClick={() => location.reload()}
+              src="/SpotiFineLogo.png"
+              width={96}
+              height={96}
+              alt="SpotiFine logo"
+            />
+            <h1 className="text-6xl font-bold ml-4 my-auto">SpotiFine</h1>
+          </header>
           <h1 className="text-2xl font-bold">
             Step 1 - Download your Spotify data
           </h1>
