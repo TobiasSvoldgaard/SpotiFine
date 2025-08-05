@@ -13,6 +13,7 @@ import TopSongs from "./components/TopSongs";
 import SongsByDay from "./components/SongsByDay";
 import SongsByHour from "./components/SongsByHour";
 import MostSkippedSongs from "./components/MostSkippedSongs";
+import Spinner from "./components/Spinner";
 
 export default function Home() {
   const [fileUploadName, setFileUploadName] = useState("");
@@ -20,12 +21,18 @@ export default function Home() {
   const [userData, setUserData] = useState<File>();
   const [statistics, setStatistics] = useState<statistics | null>(null);
   const [showProceedButton, setShowProceedButton] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fileUploadRef = useRef<HTMLInputElement>(null);
 
   const handleDataSubmission = async () => {
     if (fileUploadSize > 0 && userData !== undefined) {
-      setStatistics(await getStats(userData));
+      setLoading(true);
+      try {
+        setStatistics(await getStats(userData));
+      } finally {
+        setLoading(false);
+      }
     } else {
       alert("An error has occured");
     }
@@ -192,6 +199,7 @@ export default function Home() {
               </button>
             )}
           </div>
+          {loading && <Spinner />}
           {statistics !== null && (
             <>
               {statistics.totalSongsPlayed > 0 && (
@@ -250,7 +258,7 @@ export default function Home() {
             </>
           )}
           <div className="proceedButton">
-            {!showProceedButton && (
+            {!showProceedButton && !loading && (
               <button
                 className="bg-[#d92e2e] hover:bg-[#991d1d] cursor-pointer px-8 py-4 rounded-lg select-none"
                 onClick={() => {
