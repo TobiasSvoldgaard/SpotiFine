@@ -152,6 +152,12 @@ export default function Home() {
             else.
           </p>
           <br />
+          <div className="proceedButton">
+            <button
+              className={`${
+                fileUploadSize !== 0
+                  ? "bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer"
+                  : "bg-[#707070]"
               } px-8 py-4 rounded-lg select-none`}
               onClick={() => {
                 if (fileUploadSize > 0) {
