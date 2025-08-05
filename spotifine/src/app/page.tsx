@@ -138,7 +138,6 @@ export default function Home() {
               }}
             />
           </div>
-          {fileUploadName !== "" && fileUploadSize !== 0 && (
           {fileUploadSize !== 0 && (
             <p>{fileUploadName + " " + fileUploadSize.toFixed(2) + " MB"}</p>
           )}
