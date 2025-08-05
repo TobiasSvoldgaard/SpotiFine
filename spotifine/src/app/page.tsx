@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { statistics } from "./types";
 import getStats from "./getStats";
 import TopPodcasts from "./components/TopPodcasts";
 import PodcastsOverview from "./components/PodcastsOverview";
