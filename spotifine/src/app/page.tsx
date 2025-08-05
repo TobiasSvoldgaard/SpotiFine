@@ -112,7 +112,6 @@ export default function Home() {
             <p>or</p>
             <br />
             <label
-              className="bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer px-8 py-4 rounded-lg"
               className="bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer px-8 py-4 rounded-lg select-none"
               htmlFor="fileUpload"
             >
