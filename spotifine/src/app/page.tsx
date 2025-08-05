@@ -1,6 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import getStats from "./getStats";
+import TopPodcasts from "./components/TopPodcasts";
+import PodcastsOverview from "./components/PodcastsOverview";
+import MusicOverview from "./components/MusicOverview";
+import TopAlbums from "./components/TopAlbums";
+import TopArtists from "./components/TopArtists";
+import TopSongs from "./components/TopSongs";
 
 export default function Home() {
   const [fileUploadName, setFileUploadName] = useState("");
