@@ -151,6 +151,7 @@ export default function Home() {
             entirely in your browser, and is never stored or shared anywhere
             else.
           </p>
+          <br />
               } px-8 py-4 rounded-lg select-none`}
               onClick={() => {
                 if (fileUploadSize > 0) {
