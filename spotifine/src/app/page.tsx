@@ -9,6 +9,7 @@ import MusicOverview from "./components/MusicOverview";
 import TopAlbums from "./components/TopAlbums";
 import TopArtists from "./components/TopArtists";
 import TopSongs from "./components/TopSongs";
+import SongsByDay from "./components/SongsByDay";
 
 export default function Home() {
   const [fileUploadName, setFileUploadName] = useState("");
@@ -188,6 +189,10 @@ export default function Home() {
                       mostPlayedArtists={statistics.mostPlayedArtists}
                     />
                     <TopAlbums mostPlayedAlbums={statistics.mostPlayedAlbums} />
+                    <SongsByDay
+                      songsByDay={statistics.songsByDay}
+                      totalSongsPlayed={statistics.totalSongsPlayed}
+                    />
                   </div>
                 </>
               )}

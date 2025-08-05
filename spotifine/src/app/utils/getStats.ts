@@ -14,6 +14,7 @@ export default async function getStats(userData: File): Promise<statistics> {
   const mostPlayedAlbumsMap = new Map<string, album>();
   const mostPlayedPodcastsMap = new Map<string, podcast>();
 
+  const songsByDay = [0, 0, 0, 0, 0, 0, 0];
   const fileEntries = Object.entries(zip.files);
 
   await Promise.all(
@@ -123,6 +124,10 @@ export default async function getStats(userData: File): Promise<statistics> {
     mostPlayedAlbumsMap.get(
       song.master_metadata_album_album_name
     )!.timesPlayed += 1;
+
+    // Save day when song was played.
+    const day = new Date(song.ts).getUTCDay();
+    songsByDay[day] = songsByDay[day] + 1;
   }
 
   for (const episode of podcastListeningHistory) {
@@ -160,6 +165,7 @@ export default async function getStats(userData: File): Promise<statistics> {
     mostPlayedArtists,
     mostPlayedAlbums,
     mostPlayedPodcasts,
+    songsByDay,
   };
 }
 

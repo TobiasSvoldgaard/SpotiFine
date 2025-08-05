@@ -62,4 +62,5 @@ export type statistics = {
   mostPlayedArtists: artist[];
   mostPlayedAlbums: album[];
   mostPlayedPodcasts: podcast[];
+  songsByDay: number[];
 };
