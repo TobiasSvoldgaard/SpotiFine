@@ -19,7 +19,11 @@ export default function SongsByDay({
         <br />
         <div className="flex gap-4 w-full">
           {days.map((day) => (
-            <div key={day} className="flex-1 flex flex-col items-center">
+            <div
+              key={day}
+              className="flex-1 flex flex-col items-center"
+              style={{ minWidth: "8px", flex: "1 1 0" }}
+            >
               {/* Fixed height container for bar */}
               <div className="h-50 w-full flex items-end">
                 <div
