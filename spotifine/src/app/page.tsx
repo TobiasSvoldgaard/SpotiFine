@@ -13,6 +13,16 @@ import TopSongs from "./components/TopSongs";
 export default function Home() {
   const [fileUploadName, setFileUploadName] = useState("");
   const [fileUploadSize, setFileUploadSize] = useState(0);
+  const [userData, setUserData] = useState<File>();
+  const [statistics, setStatistics] = useState<statistics | null>(null);
+
+  const handleDataSubmission = async () => {
+    if (fileUploadSize > 0 && userData !== undefined) {
+      setStatistics(await getStats(userData));
+    } else {
+      alert("An error has occured");
+    }
+  };
 
   useEffect(() => {
     const fileDropZone = document.getElementById("fileDropZone");
