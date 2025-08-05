@@ -228,15 +228,8 @@ export default function Home() {
             </>
           )}
           {/* 
-          Total songs listened to
-          Hours listened
-          Top artists
-          Top tracks
-          Song per month
-          Most active day
-          Most active hour
-          Top genres
-          Podcasts?
+          Songs per year/month/week/day
+          Most active hour/day/month
           */}
         </div>
         <div className="sideColumn">
