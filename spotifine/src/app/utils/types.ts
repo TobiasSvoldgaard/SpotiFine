@@ -63,4 +63,5 @@ export type statistics = {
   mostPlayedAlbums: album[];
   mostPlayedPodcasts: podcast[];
   songsByDay: number[];
+  songsByHour: number[];
 };
