@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { statistics } from "./utils/types";
 import getStats from "./utils/getStats";
@@ -20,6 +20,8 @@ export default function Home() {
   const [userData, setUserData] = useState<File>();
   const [statistics, setStatistics] = useState<statistics | null>(null);
   const [showProceedButton, setShowProceedButton] = useState(true);
+
+  const fileUploadRef = useRef<HTMLInputElement>(null);
 
   const handleDataSubmission = async () => {
     if (fileUploadSize > 0 && userData !== undefined) {
@@ -134,6 +136,7 @@ export default function Home() {
               Choose file
             </label>
             <input
+              ref={fileUploadRef}
               type="file"
               name="fileUpload"
               id="fileUpload"
@@ -152,7 +155,6 @@ export default function Home() {
 
                 setFileUploadName(file.name);
                 setFileUploadSize(file.size / 1000000);
-
                 setUserData(file);
               }}
             />
@@ -247,10 +249,23 @@ export default function Home() {
               )}
             </>
           )}
-          {/* 
-          Songs per year/month/week/day
-          Most active hour/day/month
-          */}
+          <div className="proceedButton">
+            {!showProceedButton && (
+              <button
+                className="bg-[#d92e2e] hover:bg-[#991d1d] cursor-pointer px-8 py-4 rounded-lg select-none"
+                onClick={() => {
+                  setShowProceedButton(!showProceedButton);
+                  setFileUploadName("");
+                  setFileUploadSize(0);
+                  setUserData(undefined);
+                  setStatistics(null);
+                  fileUploadRef.current!.value = "";
+                }}
+              >
+                Reset
+              </button>
+            )}
+          </div>
         </div>
         <div className="sideColumn">
           <br />
