@@ -8,7 +8,6 @@ body {
   overflow-x: hidden;
   scrollbar-color: white #0f9516;
   scrollbar-width: thin;
-  padding-bottom: 50vh;
 }
 
 .fileDropZone {
@@ -47,7 +46,7 @@ input[type="file"] {
 .centerColumn {
   float: left;
   width: 60%;
-  height: 100%;
+  min-height: 100vh;
   background: #121212;
 }
 

@@ -87,7 +87,7 @@ export default function Home() {
         <div className="sideColumn">
           <br />
         </div>
-        <div className="centerColumn px-32">
+        <div className="centerColumn px-32 pb-[50vh]">
           <header className="flex item-center text-end my-8">
             <Image
               className="cursor-pointer"
