@@ -45,6 +45,8 @@ export default function Home() {
       setFileUploadName(file.name);
       setFileUploadSize(file.size / 1000000);
 
+      setUserData(file);
+
       fileDropZone?.classList.remove("bg-[#393939]");
     };
 
@@ -135,6 +137,8 @@ export default function Home() {
 
                 setFileUploadName(file.name);
                 setFileUploadSize(file.size / 1000000);
+
+                setUserData(file);
               }}
             />
           </div>
