@@ -242,15 +242,6 @@ export default function Home() {
               {statistics.totalAudiobooksPlayed > 0 && (
                 <>
                   <h1 className="text-2xl font-bold">Audiobooks</h1>
-                  <p>
-                    {"You've listened to " +
-                      statistics.totalAudiobooksPlayed +
-                      " audiobooks. That's " +
-                      (
-                        statistics.totalAudiobookListeningTime / 3600000
-                      ).toFixed(2) +
-                      " hours."}
-                  </p>
                 </>
               )}
             </>
