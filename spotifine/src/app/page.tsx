@@ -91,8 +91,8 @@ export default function Home() {
             <a href="https://www.spotify.com/account/privacy/">here</a>, and
             once it&apos;s ready, you will receive a download link via email.
             Make sure to select &apos;Extended Streaming History&apos; when
-            requesting your data, as this option provides the most comprehensive
-            log of your listening activity.
+            requesting your data, as this is the only format compatible with
+            this application.
           </p>
           <br />
           <h1 className="text-2xl font-bold">
