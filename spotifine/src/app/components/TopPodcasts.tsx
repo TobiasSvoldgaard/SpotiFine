@@ -25,7 +25,7 @@ export default function TopPodcasts({
                 </span>
                 <span>
                   {podcast.timesPlayed}{" "}
-                  {podcast.timesPlayed === 1 ? "episode" : "episodes"} played
+                  {podcast.timesPlayed === 1 ? "play" : "plays"}
                 </span>
               </div>
             ))}

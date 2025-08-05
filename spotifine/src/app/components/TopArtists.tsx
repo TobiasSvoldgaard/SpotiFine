@@ -23,7 +23,7 @@ export default function TopAlbums({ mostPlayedArtists }: Props): JSX.Element {
                 </span>
                 <span>
                   {artist.timesPlayed}{" "}
-                  {artist.timesPlayed === 1 ? "song played" : "songs played"}
+                  {artist.timesPlayed === 1 ? "play" : "plays"}
                 </span>
               </div>
             ))}
