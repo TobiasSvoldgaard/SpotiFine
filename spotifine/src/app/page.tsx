@@ -19,6 +19,7 @@ export default function Home() {
   const [fileUploadSize, setFileUploadSize] = useState(0);
   const [userData, setUserData] = useState<File>();
   const [statistics, setStatistics] = useState<statistics | null>(null);
+  const [showProceedButton, setShowProceedButton] = useState(true);
 
   const handleDataSubmission = async () => {
     if (fileUploadSize > 0 && userData !== undefined) {
@@ -171,22 +172,24 @@ export default function Home() {
           </p>
           <br />
           <div className="proceedButton">
-            <button
-              className={`${
-                fileUploadSize !== 0
-                  ? "bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer"
-                  : "bg-[#707070]"
-              } px-8 py-4 rounded-lg select-none`}
-              onClick={() => {
-                if (fileUploadSize > 0) {
-                  handleDataSubmission();
-                }
-              }}
-            >
-              View data
-            </button>
+            {showProceedButton && (
+              <button
+                className={`${
+                  fileUploadSize !== 0
+                    ? "bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer"
+                    : "bg-[#707070]"
+                } px-8 py-4 rounded-lg select-none`}
+                onClick={() => {
+                  if (fileUploadSize > 0) {
+                    handleDataSubmission();
+                    setShowProceedButton(!showProceedButton);
+                  }
+                }}
+              >
+                View data
+              </button>
+            )}
           </div>
-          <br />
           {statistics !== null && (
             <>
               {statistics.totalSongsPlayed > 0 && (
