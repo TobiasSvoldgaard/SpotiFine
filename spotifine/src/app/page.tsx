@@ -88,6 +88,9 @@ export default function Home() {
             history. You can request your Spotify data{" "}
             <a href="https://www.spotify.com/account/privacy/">here</a>, and
             once it&apos;s ready, you will receive a download link via email.
+            Make sure to select &apos;Extended Streaming History&apos; when
+            requesting your data, as this option provides the most comprehensive
+            log of your listening activity.
           </p>
           <br />
           <h1 className="text-2xl font-bold">
