@@ -131,6 +131,11 @@ export default function Home() {
             else.
           </p>
               } px-8 py-4 rounded-lg select-none`}
+              onClick={() => {
+                if (fileUploadSize > 0) {
+                  handleDataSubmission();
+                }
+              }}
           {/* 
           Total songs listened to
           Hours listened
