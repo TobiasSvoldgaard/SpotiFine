@@ -97,7 +97,7 @@ export default function Home() {
             Step 2 - Upload your data below
           </h1>
           <p className="text-neutral-400">
-            Once you&apos;ve downloaded your data, simply upload the folder
+            Once you&apos;ve downloaded your data, simply upload the zip file
             below.
           </p>
           <br />
