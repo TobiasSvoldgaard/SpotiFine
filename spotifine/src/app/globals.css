@@ -16,6 +16,15 @@ body {
   text-align: center;
 }
 
+.proceedButton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 a {
   color: #0f9516;
   text-decoration: underline;
