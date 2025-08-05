@@ -33,6 +33,7 @@ export type song = {
   artist: string;
   album: string;
   timesPlayed: number;
+  timesSkipped: number;
 };
 
 export type artist = {
@@ -64,4 +65,5 @@ export type statistics = {
   mostPlayedPodcasts: podcast[];
   songsByDay: number[];
   songsByHour: number[];
+  mostSkippedSongs: song[];
 };

@@ -12,6 +12,7 @@ import TopArtists from "./components/TopArtists";
 import TopSongs from "./components/TopSongs";
 import SongsByDay from "./components/SongsByDay";
 import SongsByHour from "./components/SongsByHour";
+import MostSkippedSongs from "./components/MostSkippedSongs";
 
 export default function Home() {
   const [fileUploadName, setFileUploadName] = useState("");
@@ -209,6 +210,8 @@ export default function Home() {
                     <SongsByHour
                       songsByHour={statistics.songsByHour}
                       totalSongsPlayed={statistics.totalSongsPlayed}
+                    <MostSkippedSongs
+                      mostSkippedSongs={statistics.mostSkippedSongs}
                     />
                   </div>
                 </>
