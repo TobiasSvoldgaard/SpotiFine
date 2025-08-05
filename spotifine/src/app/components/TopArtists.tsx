@@ -1,5 +1,5 @@
 import { JSX, useState } from "react";
-import { artist } from "../types";
+import { artist } from "../utils/types";
 
 type Props = {
   mostPlayedArtists: artist[];

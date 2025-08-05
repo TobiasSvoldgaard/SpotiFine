@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { statistics } from "./types";
-import getStats from "./getStats";
+import { statistics } from "./utils/types";
+import getStats from "./utils/getStats";
 import TopPodcasts from "./components/TopPodcasts";
 import PodcastsOverview from "./components/PodcastsOverview";
 import MusicOverview from "./components/MusicOverview";

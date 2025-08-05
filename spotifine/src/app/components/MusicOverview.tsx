@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { song } from "../types";
+import { song } from "../utils/types";
 
 type Props = {
   totalSongsPlayed: number;
