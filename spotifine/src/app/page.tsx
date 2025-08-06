@@ -98,14 +98,16 @@ export default function Home() {
         <div className="centerColumn px-32 pb-[50vh]">
           <header className="flex item-center text-end my-8">
             <Image
-              className="cursor-pointer"
+              className="cursor-pointer ml-auto"
               onClick={() => location.reload()}
               src="/SpotiFineLogo.png"
               width={96}
               height={96}
               alt="SpotiFine logo"
             />
-            <h1 className="text-6xl font-bold ml-4 my-auto">SpotiFine</h1>
+            <h1 className="text-6xl font-bold ml-4 my-auto mr-auto">
+              SpotiFine
+            </h1>
           </header>
           <h1 className="text-2xl font-bold">
             Step 1 - Download your Spotify data

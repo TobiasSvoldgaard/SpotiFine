@@ -25,7 +25,7 @@ export default function SongsByHour({ songsByHour }: Props): JSX.Element {
             >
               <div className="h-50 w-full flex items-end">
                 <div
-                  className="w-full bg-white rounded-sm"
+                  className="w-full bg-white hover:bg-neutral-300 transition duration-100 rounded-sm"
                   title={`${songsByHour[hour]} plays`}
                   style={{
                     height: `${(songsByHour[hour] / mostPlays) * 100}%`,

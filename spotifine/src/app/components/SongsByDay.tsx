@@ -27,7 +27,7 @@ export default function SongsByDay({
               {/* Fixed height container for bar */}
               <div className="h-50 w-full flex items-end">
                 <div
-                  className="w-full bg-white rounded-lg"
+                  className="w-full bg-white hover:bg-neutral-300 transition duration-100 rounded-lg"
                   title={`${songsByDay[day]} plays`}
                   style={{
                     height: `${(songsByDay[day] / mostPlays) * 100}%`,
