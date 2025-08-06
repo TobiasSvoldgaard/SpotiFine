@@ -136,6 +136,7 @@ export default async function getStats(userData: File): Promise<statistics> {
         album: song.master_metadata_album_album_name,
         timesPlayed: 0,
         timesSkipped: 0,
+        id: song.spotify_track_uri.substring(14),
       });
     }
 
@@ -207,6 +208,7 @@ export default async function getStats(userData: File): Promise<statistics> {
             album: previousSong.master_metadata_album_album_name,
             timesPlayed: 0,
             timesSkipped: 0,
+            id: previousSong.spotify_track_uri.substring(14),
           });
           sessionStartTime = new Date(previousSong.ts).getTime();
         }
@@ -218,6 +220,7 @@ export default async function getStats(userData: File): Promise<statistics> {
           album: song.master_metadata_album_album_name,
           timesPlayed: 0,
           timesSkipped: 0,
+          id: song.spotify_track_uri.substring(14),
         });
       } else {
         const sessionEndTime =
