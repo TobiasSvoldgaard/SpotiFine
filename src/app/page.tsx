@@ -16,6 +16,7 @@ import MostSkippedSongs from "./components/MostSkippedSongs";
 import LongestSongStreak from "./components/LongestSongStreak";
 import LongestSongSession from "./components/LongestSongSession";
 import Spinner from "./components/Spinner";
+import Copyright from "./components/Copyright";
 
 export default function Home() {
   const [fileUploadName, setFileUploadName] = useState("");
@@ -288,6 +289,7 @@ export default function Home() {
               </button>
             )}
           </div>
+          <Copyright />
         </div>
         <div className="sideColumn">
           <br />
