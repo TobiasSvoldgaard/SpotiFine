@@ -309,4 +309,18 @@ function getTotalListeningTime(listeningHistory: media[]) {
   }
   return time;
 }
+
 function timeBetweenMedia(a: media, b: media) {
+  let firstPlayedEndTime = 0;
+  let lastPlayedStartTime = 0;
+
+  if (new Date(a.ts).getTime() < new Date(b.ts).getTime()) {
+    firstPlayedEndTime = new Date(a.ts).getTime() + a.ms_played;
+    lastPlayedStartTime = new Date(b.ts).getTime();
+  } else {
+    firstPlayedEndTime = new Date(b.ts).getTime() + b.ms_played;
+    lastPlayedStartTime = new Date(a.ts).getTime();
+  }
+
+  return Math.abs(firstPlayedEndTime - lastPlayedStartTime);
+}
