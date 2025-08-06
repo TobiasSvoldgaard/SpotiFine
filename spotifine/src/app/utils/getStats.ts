@@ -4,6 +4,7 @@ import {
   artist,
   media,
   podcast,
+  session,
   song,
   statistics,
   streak,
@@ -26,8 +27,14 @@ export default async function getStats(userData: File): Promise<statistics> {
   const lengthOfDay = 24 * 60 * 60 * 1000;
   let songStreakStartDate = 0;
   let songStreakEndDate = 0;
-  let previousDay = new Date("2008-01-01T00:00:00Z").setHours(0, 0, 0, 0);
+  let previousDay = 0;
   let songStreakLength = 1;
+
+  const longestSongSession: session[] = [];
+  const maxSongGap = 10 * 60 * 1000;
+  let previousSong = null;
+  let songsInSession: song[] = [];
+  let sessionStartTime = 0;
 
   const songsByDay = [0, 0, 0, 0, 0, 0, 0];
   const songsByHour = [
@@ -109,6 +116,17 @@ export default async function getStats(userData: File): Promise<statistics> {
     audiobookListeningHistory
   );
 
+  // Sort media arrays by when the media was played.
+  songListeningHistory.sort(
+    (a, b) => new Date(a.ts).getTime() - new Date(b.ts).getTime()
+  );
+  podcastListeningHistory.sort(
+    (a, b) => new Date(a.ts).getTime() - new Date(b.ts).getTime()
+  );
+  audiobookListeningHistory.sort(
+    (a, b) => new Date(a.ts).getTime() - new Date(b.ts).getTime()
+  );
+
   for (const song of songListeningHistory) {
     // Initialise song/artist/album if not present in the maps.
     if (!mostPlayedSongsMap.has(song.spotify_track_uri)) {
@@ -177,6 +195,67 @@ export default async function getStats(userData: File): Promise<statistics> {
     }
 
     previousDay = currentDay;
+
+    // If two songs are played within 5 minutes of each other.
+    if (previousSong !== null) {
+      if (timeBetweenMedia(song, previousSong) < maxSongGap) {
+        // Add previous song if new session.
+        if (songsInSession.length === 0) {
+          songsInSession.push({
+            title: previousSong.master_metadata_track_name,
+            artist: previousSong.master_metadata_album_artist_name,
+            album: previousSong.master_metadata_album_album_name,
+            timesPlayed: 0,
+            timesSkipped: 0,
+          });
+          sessionStartTime = new Date(previousSong.ts).getTime();
+        }
+
+        // Add current song.
+        songsInSession.push({
+          title: song.master_metadata_track_name,
+          artist: song.master_metadata_album_artist_name,
+          album: song.master_metadata_album_album_name,
+          timesPlayed: 0,
+          timesSkipped: 0,
+        });
+      } else {
+        const sessionEndTime =
+          new Date(previousSong!.ts).getTime() + previousSong!.ms_played;
+        // Push session to array.
+        if (
+          songsInSession.length > 0 &&
+          sessionEndTime - sessionStartTime > 10 * 60 * 1000
+        ) {
+          longestSongSession.push({
+            length: sessionEndTime - sessionStartTime,
+            numberOfSongs: songsInSession.length,
+            date: sessionStartTime,
+            songs: songsInSession,
+          });
+        }
+
+        // Clear songs in session.
+        songsInSession = [];
+      }
+    }
+
+    previousSong = song;
+  }
+
+  // Push current session to array.
+  const sessionEndTime =
+    new Date(previousSong!.ts).getTime() + previousSong!.ms_played;
+  if (
+    songsInSession.length > 0 &&
+    sessionEndTime - sessionStartTime > 10 * 60 * 1000
+  ) {
+    longestSongSession.push({
+      length: sessionEndTime - sessionStartTime,
+      numberOfSongs: songsInSession.length,
+      date: sessionStartTime,
+      songs: songsInSession,
+    });
   }
 
   for (const episode of podcastListeningHistory) {
@@ -203,6 +282,7 @@ export default async function getStats(userData: File): Promise<statistics> {
   mostPlayedAlbums.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedPodcasts.sort((a, b) => b.timesPlayed - a.timesPlayed);
   longestSongStreak.sort((a, b) => b.length - a.length);
+  longestSongSession.sort((a, b) => b.length - a.length);
 
   return {
     totalSongsPlayed: songListeningHistory.length,
@@ -218,6 +298,7 @@ export default async function getStats(userData: File): Promise<statistics> {
     songsByDay,
     songsByHour,
     longestSongStreak,
+    longestSongSession,
   };
 }
 
@@ -228,3 +309,4 @@ function getTotalListeningTime(listeningHistory: media[]) {
   }
   return time;
 }
+function timeBetweenMedia(a: media, b: media) {

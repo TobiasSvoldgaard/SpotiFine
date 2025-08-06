@@ -58,6 +58,13 @@ export type streak = {
   endDate: number;
 };
 
+export type session = {
+  length: number;
+  numberOfSongs: number;
+  date: number;
+  songs: song[];
+};
+
 export type statistics = {
   totalSongsPlayed: number;
   totalPodcastEpisodesPlayed: number;
@@ -72,4 +79,5 @@ export type statistics = {
   songsByDay: number[];
   songsByHour: number[];
   longestSongStreak: streak[];
+  longestSongSession: session[];
 };
