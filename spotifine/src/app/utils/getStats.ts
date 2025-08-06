@@ -22,6 +22,13 @@ export default async function getStats(userData: File): Promise<statistics> {
   const mostPlayedAlbumsMap = new Map<string, album>();
   const mostPlayedPodcastsMap = new Map<string, podcast>();
 
+  const longestSongStreak: streak[] = [];
+  const lengthOfDay = 24 * 60 * 60 * 1000;
+  let songStreakStartDate = 0;
+  let songStreakEndDate = 0;
+  let previousDay = new Date("2008-01-01T00:00:00Z").setHours(0, 0, 0, 0);
+  let songStreakLength = 1;
+
   const songsByDay = [0, 0, 0, 0, 0, 0, 0];
   const songsByHour = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -148,6 +155,28 @@ export default async function getStats(userData: File): Promise<statistics> {
     // Save hour when song was played.
     const hour = new Date(song.ts).getUTCHours();
     songsByHour[hour] = songsByHour[hour] + 1;
+
+    // Get current song day, set time to 12 AM.
+    const currentDay = new Date(song.ts).setHours(0, 0, 0, 0);
+
+    if (currentDay - previousDay === lengthOfDay) {
+      if (songStreakLength === 1) {
+        songStreakStartDate = previousDay;
+      }
+      songStreakLength += 1;
+    } else if (currentDay - previousDay !== 0) {
+      if (songStreakLength > 1) {
+        songStreakEndDate = previousDay;
+        longestSongStreak.push({
+          length: songStreakLength,
+          startDate: songStreakStartDate,
+          endDate: songStreakEndDate,
+        });
+      }
+      songStreakLength = 1;
+    }
+
+    previousDay = currentDay;
   }
 
   for (const episode of podcastListeningHistory) {
@@ -173,6 +202,7 @@ export default async function getStats(userData: File): Promise<statistics> {
   mostPlayedArtists.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedAlbums.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedPodcasts.sort((a, b) => b.timesPlayed - a.timesPlayed);
+  longestSongStreak.sort((a, b) => b.length - a.length);
 
   return {
     totalSongsPlayed: songListeningHistory.length,
@@ -187,6 +217,7 @@ export default async function getStats(userData: File): Promise<statistics> {
     mostPlayedPodcasts,
     songsByDay,
     songsByHour,
+    longestSongStreak,
   };
 }
 

@@ -13,6 +13,7 @@ import TopSongs from "./components/TopSongs";
 import SongsByDay from "./components/SongsByDay";
 import SongsByHour from "./components/SongsByHour";
 import MostSkippedSongs from "./components/MostSkippedSongs";
+import LongestSongStreak from "./components/LongestSongStreak";
 import Spinner from "./components/Spinner";
 
 export default function Home() {
@@ -221,6 +222,9 @@ export default function Home() {
                       totalSongsPlayed={statistics.totalSongsPlayed}
                     />
                     <SongsByHour songsByHour={statistics.songsByHour} />
+
+                    <LongestSongStreak
+                      longestSongStreak={statistics.longestSongStreak}
                     />
                   </div>
                   <MostSkippedSongs

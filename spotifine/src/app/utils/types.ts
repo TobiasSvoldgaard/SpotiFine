@@ -52,6 +52,12 @@ export type podcast = {
   timesPlayed: number;
 };
 
+export type streak = {
+  length: number;
+  startDate: number;
+  endDate: number;
+};
+
 export type statistics = {
   totalSongsPlayed: number;
   totalPodcastEpisodesPlayed: number;
@@ -65,5 +71,5 @@ export type statistics = {
   mostPlayedPodcasts: podcast[];
   songsByDay: number[];
   songsByHour: number[];
-  mostSkippedSongs: song[];
+  longestSongStreak: streak[];
 };
