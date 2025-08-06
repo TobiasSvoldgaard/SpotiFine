@@ -14,6 +14,7 @@ import SongsByDay from "./components/SongsByDay";
 import SongsByHour from "./components/SongsByHour";
 import MostSkippedSongs from "./components/MostSkippedSongs";
 import LongestSongStreak from "./components/LongestSongStreak";
+import LongestSongSession from "./components/LongestSongSession";
 import Spinner from "./components/Spinner";
 
 export default function Home() {
@@ -228,6 +229,9 @@ export default function Home() {
                     <LongestSongStreak
                       longestSongStreak={statistics.longestSongStreak}
                     />
+                    <LongestSongSession
+                      longestSongSession={statistics.longestSongSession}
+                    />
                   </div>
                   <MostSkippedSongs
                     mostPlayedSongs={statistics.mostPlayedSongs
@@ -277,6 +281,7 @@ export default function Home() {
                   setUserData(undefined);
                   setStatistics(null);
                   fileUploadRef.current!.value = "";
+                  document.documentElement.scrollTop = 0;
                 }}
               >
                 Reset

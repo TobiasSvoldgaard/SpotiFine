@@ -49,9 +49,6 @@ export default function SongsByHour({ songsByHour }: Props): JSX.Element {
                   }{" "}
                 </span>
               )}
-              {/* <span className="mt-1 text-xs text-white">
-                {((songsByHour[hour] / totalSongsPlayed) * 100).toFixed(2)}%
-              </span> */}
             </div>
           ))}
         </div>
