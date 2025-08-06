@@ -244,7 +244,7 @@ export default function Home() {
               {statistics.totalPodcastEpisodesPlayed > 0 && (
                 <>
                   <h1 className="text-2xl font-bold">Podcasts</h1>
-                  <div className="flex gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <PodcastsOverview
                       totalPodcastEpisodesPlayed={
                         statistics.totalPodcastEpisodesPlayed
