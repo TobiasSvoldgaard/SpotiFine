@@ -1,41 +1,40 @@
 import { JSX, useState } from "react";
-import { artist } from "../utils/types";
+import { album } from "@/app/utils/types";
 
 type Props = {
-  mostPlayedArtists: artist[];
+  mostPlayedAlbums: album[];
 };
 
-export default function TopAlbums({ mostPlayedArtists }: Props): JSX.Element {
+export default function TopAlbums({ mostPlayedAlbums }: Props): JSX.Element {
   const [showMore, setShowMore] = useState(false);
-  const [numberOfArtistsToShow, setNumberOfArtistsToShow] =
-    useState<number>(10);
+  const [numberOfAlbumsToShow, setNumberOfAlbumsToShow] = useState<number>(10);
   return (
     <>
       <div className="w-[100%] bg-[#0f9516] rounded-2xl px-4 overflow-hidden">
         <div className="h-100 overflow-y-auto p-8">
-          <h1 className="text-2xl font-bold">Top Artists</h1>
-          {mostPlayedArtists
-            .slice(0, numberOfArtistsToShow)
-            .map((artist, index) => (
+          <h1 className="text-2xl font-bold">Top Albums</h1>
+          {mostPlayedAlbums
+            .slice(0, numberOfAlbumsToShow)
+            .map((album, index) => (
               <div key={index} className="flex justify-between">
                 <span className="w-[70%] truncate">
-                  {index + 1}. {artist.name}
+                  {index + 1}. {album.title}
                 </span>
                 <span>
-                  {artist.timesPlayed}{" "}
-                  {artist.timesPlayed === 1 ? "play" : "plays"}
+                  {album.timesPlayed}{" "}
+                  {album.timesPlayed === 1 ? "play" : "plays"}
                 </span>
               </div>
             ))}
           <br />
-          {mostPlayedArtists.length > 10 && (
+          {mostPlayedAlbums.length > 10 && (
             <p
               className="text-right underline cursor-pointer mt-2"
               onClick={() => {
                 if (showMore) {
-                  setNumberOfArtistsToShow(10);
+                  setNumberOfAlbumsToShow(10);
                 } else {
-                  setNumberOfArtistsToShow(mostPlayedArtists.length);
+                  setNumberOfAlbumsToShow(mostPlayedAlbums.length);
                 }
                 setShowMore(!showMore);
               }}

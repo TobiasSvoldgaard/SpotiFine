@@ -1,5 +1,5 @@
 import { JSX, useState } from "react";
-import { streak } from "../utils/types";
+import { streak } from "@/app/utils/types";
 
 type Props = {
   longestSongStreak: streak[];

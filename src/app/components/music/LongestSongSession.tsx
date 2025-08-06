@@ -1,5 +1,5 @@
+import { session } from "@/app/utils/types";
 import { JSX, useState } from "react";
-import { session } from "../utils/types";
 
 type Props = {
   longestSongSession: session[];
