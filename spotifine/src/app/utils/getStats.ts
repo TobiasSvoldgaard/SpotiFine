@@ -1,5 +1,13 @@
 import JSZip from "jszip";
-import { album, artist, media, podcast, song, statistics } from "./types";
+import {
+  album,
+  artist,
+  media,
+  podcast,
+  song,
+  statistics,
+  streak,
+} from "./types";
 
 export default async function getStats(userData: File): Promise<statistics> {
   const zip = await JSZip.loadAsync(userData);
@@ -13,7 +21,6 @@ export default async function getStats(userData: File): Promise<statistics> {
   const mostPlayedArtistMap = new Map<string, artist>();
   const mostPlayedAlbumsMap = new Map<string, album>();
   const mostPlayedPodcastsMap = new Map<string, podcast>();
-  const mostSkippedSongsMap = new Map<string, song>();
 
   const songsByDay = [0, 0, 0, 0, 0, 0, 0];
   const songsByHour = [
@@ -122,27 +129,17 @@ export default async function getStats(userData: File): Promise<statistics> {
       });
     }
 
-    if (song.skipped && !mostSkippedSongsMap.has(song.spotify_track_uri)) {
-      mostSkippedSongsMap.set(song.spotify_track_uri, {
-        title: song.master_metadata_track_name,
-        artist: song.master_metadata_album_artist_name,
-        album: song.master_metadata_album_album_name,
-        timesPlayed: 0,
-        timesSkipped: 0,
-      });
-    }
-
     // Update count.
     mostPlayedSongsMap.get(song.spotify_track_uri)!.timesPlayed += 1;
+    if (song.skipped) {
+      mostPlayedSongsMap.get(song.spotify_track_uri)!.timesSkipped += 1;
+    }
     mostPlayedArtistMap.get(
       song.master_metadata_album_artist_name
     )!.timesPlayed += 1;
     mostPlayedAlbumsMap.get(
       song.master_metadata_album_album_name
     )!.timesPlayed += 1;
-    if (song.skipped) {
-      mostSkippedSongsMap.get(song.spotify_track_uri)!.timesSkipped += 1;
-    }
 
     // Save day when song was played.
     const day = new Date(song.ts).getUTCDay();
@@ -171,13 +168,11 @@ export default async function getStats(userData: File): Promise<statistics> {
   const mostPlayedArtists = Array.from(mostPlayedArtistMap.values());
   const mostPlayedAlbums = Array.from(mostPlayedAlbumsMap.values());
   const mostPlayedPodcasts = Array.from(mostPlayedPodcastsMap.values());
-  const mostSkippedSongs = Array.from(mostSkippedSongsMap.values());
 
   mostPlayedSongs.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedArtists.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedAlbums.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedPodcasts.sort((a, b) => b.timesPlayed - a.timesPlayed);
-  mostSkippedSongs.sort((a, b) => b.timesSkipped - a.timesSkipped);
 
   return {
     totalSongsPlayed: songListeningHistory.length,
@@ -192,7 +187,6 @@ export default async function getStats(userData: File): Promise<statistics> {
     mostPlayedPodcasts,
     songsByDay,
     songsByHour,
-    mostSkippedSongs,
   };
 }
 

@@ -221,10 +221,13 @@ export default function Home() {
                       totalSongsPlayed={statistics.totalSongsPlayed}
                     />
                     <SongsByHour songsByHour={statistics.songsByHour} />
-                    <MostSkippedSongs
-                      mostSkippedSongs={statistics.mostSkippedSongs}
                     />
                   </div>
+                  <MostSkippedSongs
+                    mostPlayedSongs={statistics.mostPlayedSongs
+                      .filter((song) => song.timesSkipped > 0)
+                      .sort((a, b) => b.timesSkipped - a.timesSkipped)}
+                  />
                 </>
               )}
               <br />
