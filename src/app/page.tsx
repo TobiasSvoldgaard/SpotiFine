@@ -98,7 +98,7 @@ export default function Home() {
         <div className="sideColumn">
           <br />
         </div>
-        <div className="centerColumn px-32 pb-[50vh]">
+        <div className="relative centerColumn px-32 pb-[50vh]">
           <header className="flex item-center text-end my-8">
             <Image
               className="cursor-pointer ml-auto"
@@ -119,11 +119,13 @@ export default function Home() {
             Spotify allows you to request and download a copy of your personal
             data, which includes a detailed record of your entire listening
             history. You can request your Spotify data{" "}
-            <a href="https://www.spotify.com/account/privacy/">here</a>, and
-            once it&apos;s ready, you will receive a download link via email.
-            Make sure to select &apos;Extended Streaming History&apos; when
-            requesting your data, as this is the only format compatible with
-            this application.
+            <a href="https://www.spotify.com/account/privacy/" target="_blank">
+              here
+            </a>
+            , and once it&apos;s ready, you will receive a download link via
+            email. Make sure to select &apos;Extended Streaming History&apos;
+            when requesting your data, as this is the only format compatible
+            with this application.
           </p>
           <br />
           <h1 className="text-2xl font-bold">
@@ -275,7 +277,7 @@ export default function Home() {
           <div className="proceedButton">
             {!showProceedButton && !loading && (
               <button
-                className="bg-[#d92e2e] hover:bg-[#991d1d] cursor-pointer px-8 py-4 rounded-lg select-none"
+                className="bg-white hover:bg-neutral-300 text-black cursor-pointer px-8 py-4 rounded-lg select-none"
                 onClick={() => {
                   setShowProceedButton(!showProceedButton);
                   setFileUploadName("");

@@ -89,7 +89,7 @@ export default async function getStats(userData: File): Promise<statistics> {
               incognito_mode: entry.incognito_mode,
             };
 
-            // Classify media based URI type.
+            // Classify media based on URI type.
             if (item.spotify_track_uri) {
               songListeningHistory.push(item);
             } else if (item.spotify_episode_uri) {
@@ -107,16 +107,7 @@ export default async function getStats(userData: File): Promise<statistics> {
     })
   );
 
-  // Get total listening time for songs, podcasts, and audiobooks.
-  const totalSongListeningTime = getTotalListeningTime(songListeningHistory);
-  const totalPodcastListeningTime = getTotalListeningTime(
-    podcastListeningHistory
-  );
-  const totalAudiobookListeningTime = getTotalListeningTime(
-    audiobookListeningHistory
-  );
-
-  // Sort media arrays by when the media was played.
+  // Sort arrays by when the media was played.
   songListeningHistory.sort(
     (a, b) => new Date(a.ts).getTime() - new Date(b.ts).getTime()
   );
@@ -125,6 +116,15 @@ export default async function getStats(userData: File): Promise<statistics> {
   );
   audiobookListeningHistory.sort(
     (a, b) => new Date(a.ts).getTime() - new Date(b.ts).getTime()
+  );
+
+  // Get total listening time for songs, podcasts, and audiobooks.
+  const totalSongListeningTime = getTotalListeningTime(songListeningHistory);
+  const totalPodcastListeningTime = getTotalListeningTime(
+    podcastListeningHistory
+  );
+  const totalAudiobookListeningTime = getTotalListeningTime(
+    audiobookListeningHistory
   );
 
   for (const song of songListeningHistory) {
