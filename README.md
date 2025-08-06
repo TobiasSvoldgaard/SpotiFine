@@ -6,7 +6,7 @@ Check it out here: https://spotifine.vercel.app/
 
 Currently, you are able to see the following:
 
-### Music
+### 🎵 Music
 - Total songs listened to
 - Total hours spent listening to music
 - Most played songs
@@ -18,10 +18,16 @@ Currently, you are able to see the following:
 - Longest uninterrupted listening sessions
 - Most skipped songs and their skip rate
 
-### Podcasts
+### 🎤 Podcasts
 - Total episodes listened to
 - Total hours spent listening
 - Most played podcasts
 
-### Work in Progress
+### 🚧 Work in Progress
 More features and statistics are still actively being developed.
+
+### 💻 Tech Stack
+- Next.js (React framework)
+- TypeScript
+- Tailwind
+- JSZip
