@@ -119,6 +119,9 @@ export default function Home() {
               SpotiFine
             </h1>
           </header>
+          <h1 className="text-2xl font-bold">What is SpotiFine?</h1>
+          <p className="text-neutral-400">blah blah blah</p>
+          <br />
           <h1 className="text-2xl font-bold">
             Step 1 - Download your Spotify data
           </h1>
@@ -309,6 +312,7 @@ export default function Home() {
                   setFileUploadSize(0);
                   setUserData(undefined);
                   setStatistics(null);
+                  setSelectedSongId("");
                   fileUploadRef.current!.value = "";
                   document.documentElement.scrollTop = 0;
                 }}
