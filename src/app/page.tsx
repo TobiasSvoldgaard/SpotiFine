@@ -224,7 +224,7 @@ export default function Home() {
               {statistics.totalSongsPlayed > 0 && (
                 <>
                   <h1 className="text-2xl font-bold">Music</h1>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-4">
                       <MusicOverview
                         totalSongsPlayed={statistics.totalSongsPlayed}
@@ -249,7 +249,7 @@ export default function Home() {
                       songsByDay={statistics.songsByDay}
                       totalSongsPlayed={statistics.totalSongsPlayed}
                     />
-                    <div className="col-span-2">
+                    <div className="md:col-span-2">
                       <SongsByHour songsByHour={statistics.songsByHour} />
                     </div>
                     <LongestSongStreak
@@ -258,7 +258,7 @@ export default function Home() {
                     <LongestSongSession
                       longestSongSession={statistics.longestSongSession}
                     />
-                    <div className="col-span-2">
+                    <div className="md:col-span-2">
                       <MostSkippedSongs
                         mostPlayedSongs={statistics.mostPlayedSongs
                           .filter((song) => song.timesSkipped > 0)
