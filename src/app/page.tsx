@@ -16,6 +16,7 @@ import SongsByHour from "./components/music/SongsByHour";
 import MostSkippedSongs from "./components/music/MostSkippedSongs";
 import LongestSongStreak from "./components/music/LongestSongStreak";
 import LongestSongSession from "./components/music/LongestSongSession";
+import NeverSkipped from "./components/music/NeverSkipped";
 import Spinner from "./components/Spinner";
 import Copyright from "./components/Copyright";
 
@@ -289,20 +290,28 @@ export default function Home() {
                     <div className="md:col-span-2">
                       <SongsByHour songsByHour={statistics.songsByHour} />
                     </div>
-                    <LongestSongStreak
-                      longestSongStreak={statistics.longestSongStreak}
-                    />
-                    <LongestSongSession
-                      longestSongSession={statistics.longestSongSession}
-                    />
-                    <div className="md:col-span-2">
-                      <MostSkippedSongs
-                        mostPlayedSongs={statistics.mostPlayedSongs
-                          .filter((song) => song.timesSkipped > 0)
-                          .sort((a, b) => b.timesSkipped - a.timesSkipped)}
-                        setSelectedSongId={setSelectedSongId}
+                    {statistics.longestSongStreak.length > 0 && (
+                      <LongestSongStreak
+                        longestSongStreak={statistics.longestSongStreak}
                       />
-                    </div>
+                    )}
+                    {statistics.longestSongSession.length > 0 && (
+                      <LongestSongSession
+                        longestSongSession={statistics.longestSongSession}
+                      />
+                    )}
+                    {statistics.numberOfSkippedSongs > 0 ? (
+                      <div className="md:col-span-2">
+                        <MostSkippedSongs
+                          mostPlayedSongs={statistics.mostPlayedSongs
+                            .filter((song) => song.timesSkipped > 0)
+                            .sort((a, b) => b.timesSkipped - a.timesSkipped)}
+                          setSelectedSongId={setSelectedSongId}
+                        />
+                      </div>
+                    ) : (
+                      <NeverSkipped />
+                    )}
                   </div>
                 </>
               )}
