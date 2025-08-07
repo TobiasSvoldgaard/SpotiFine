@@ -38,6 +38,11 @@ html {
   text-decoration: underline;
 }
 
+.linkStyle:hover {
+  color: #13bf1c;
+  text-decoration: underline;
+}
+
 input[type="file"] {
   display: none;
 }
