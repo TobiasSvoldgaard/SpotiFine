@@ -87,4 +87,5 @@ export type statistics = {
   longestSongStreak: streak[];
   longestSongSession: session[];
   songsByCountry: country[];
+  numberOfSkippedSongs: number;
 };

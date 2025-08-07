@@ -222,6 +222,9 @@ export default function Home() {
                 setFileUploadName(file.name);
                 setFileUploadSize(file.size / 1000000);
                 setUserData(file);
+                setStatistics(null);
+                setSelectedSongId("");
+                setShowProceedButton(true);
               }}
             />
           </div>
@@ -243,7 +246,7 @@ export default function Home() {
             {showProceedButton && (
               <button
                 className={`${
-                  fileUploadSize !== 0
+                  fileUploadSize > 0
                     ? "bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer"
                     : "bg-[#707070]"
                 } px-8 py-4 rounded-lg select-none`}
@@ -251,6 +254,10 @@ export default function Home() {
                   if (fileUploadSize > 0) {
                     handleDataSubmission();
                     setShowProceedButton(!showProceedButton);
+                    setFileUploadName("");
+                    setFileUploadSize(0);
+                    setUserData(undefined);
+                    fileUploadRef.current!.value = "";
                   }
                 }}
               >

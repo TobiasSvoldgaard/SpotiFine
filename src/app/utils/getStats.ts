@@ -44,6 +44,7 @@ export default async function getStats(userData: File): Promise<statistics> {
   ];
   const songsByCountryMap = new Map<string, country>();
 
+  let numberOfSkippedSongs = 0;
 
   const fileEntries = Object.entries(zip.files);
 
@@ -172,6 +173,7 @@ export default async function getStats(userData: File): Promise<statistics> {
     mostPlayedSongsMap.get(song.spotify_track_uri)!.timesPlayed += 1;
     if (song.skipped) {
       mostPlayedSongsMap.get(song.spotify_track_uri)!.timesSkipped += 1;
+      numberOfSkippedSongs += 1;
     }
     mostPlayedArtistMap.get(
       song.master_metadata_album_artist_name
@@ -179,6 +181,7 @@ export default async function getStats(userData: File): Promise<statistics> {
     mostPlayedAlbumsMap.get(
       song.master_metadata_album_album_name
     )!.timesPlayed += 1;
+    songsByCountryMap.get(songCountry)!.timesPlayed! += 1;
 
     // Save day when song was played.
     const day = new Date(song.ts).getUTCDay();
@@ -260,18 +263,20 @@ export default async function getStats(userData: File): Promise<statistics> {
   }
 
   // Push current session to array.
-  const sessionEndTime =
-    new Date(previousSong!.ts).getTime() + previousSong!.ms_played;
-  if (
-    songsInSession.length > 0 &&
-    sessionEndTime - sessionStartTime > 10 * 60 * 1000
-  ) {
-    longestSongSession.push({
-      length: sessionEndTime - sessionStartTime,
-      numberOfSongs: songsInSession.length,
-      date: sessionStartTime,
-      songs: songsInSession,
-    });
+  if (previousSong !== null) {
+    const sessionEndTime =
+      new Date(previousSong.ts).getTime() + previousSong.ms_played;
+    if (
+      songsInSession.length > 0 &&
+      sessionEndTime - sessionStartTime > 10 * 60 * 1000
+    ) {
+      longestSongSession.push({
+        length: sessionEndTime - sessionStartTime,
+        numberOfSongs: songsInSession.length,
+        date: sessionStartTime,
+        songs: songsInSession,
+      });
+    }
   }
 
   for (const episode of podcastListeningHistory) {
@@ -294,6 +299,7 @@ export default async function getStats(userData: File): Promise<statistics> {
   const mostPlayedPodcasts = Array.from(mostPlayedPodcastsMap.values());
   const songsByCountry = Array.from(songsByCountryMap.values());
 
+  // Sort arrays.
   mostPlayedSongs.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedArtists.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedAlbums.sort((a, b) => b.timesPlayed - a.timesPlayed);
@@ -322,6 +328,7 @@ export default async function getStats(userData: File): Promise<statistics> {
     longestSongStreak,
     longestSongSession,
     songsByCountry,
+    numberOfSkippedSongs,
   };
 }
 
