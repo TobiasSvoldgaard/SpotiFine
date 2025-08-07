@@ -20,7 +20,7 @@ export default function TopAlbums({ mostPlayedAlbums }: Props): JSX.Element {
                 <span className="w-[70%] truncate">
                   {index + 1}. {album.title}
                 </span>
-                <span>
+                <span className="truncate">
                   {album.timesPlayed}{" "}
                   {album.timesPlayed === 1 ? "play" : "plays"}
                 </span>

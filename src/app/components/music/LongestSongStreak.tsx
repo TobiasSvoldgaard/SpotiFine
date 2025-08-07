@@ -25,7 +25,7 @@ export default function LongestSongStreak({
                   {new Date(streak.startDate).toLocaleDateString("en-GB")} to{" "}
                   {new Date(streak.endDate).toLocaleDateString("en-GB")}
                 </span>
-                <span>{streak.length} days</span>
+                <span className="truncate">{streak.length} days</span>
               </div>
             ))}
           <br />

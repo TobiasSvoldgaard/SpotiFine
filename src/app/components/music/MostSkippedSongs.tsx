@@ -29,10 +29,10 @@ export default function MostSkippedSongs({
                   {index + 1}. {song.title} - {song.artist}
                 </a>
               </span>
-              <span className="w-[20%] text-center">
+              <span className="w-[20%] text-center truncate">
                 {song.timesSkipped} {song.timesSkipped === 1 ? "skip" : "skips"}
               </span>
-              <span className="w-[40%] text-right">
+              <span className="w-[40%] text-right truncate">
                 {((song.timesSkipped / song.timesPlayed) * 100).toFixed(2)}%
                 skip rate
               </span>

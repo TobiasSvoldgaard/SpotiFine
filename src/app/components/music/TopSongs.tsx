@@ -45,7 +45,7 @@ export default function TopSongs({
                   {index + 1}. {song.title} - {song.artist}
                 </a>
               </span>
-              <span>
+              <span className="truncate">
                 {song.timesPlayed} {song.timesPlayed === 1 ? "play" : "plays"}
               </span>
             </div>

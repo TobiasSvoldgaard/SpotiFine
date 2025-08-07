@@ -21,7 +21,7 @@ export default function TopAlbums({ mostPlayedArtists }: Props): JSX.Element {
                 <span className="w-[70%] truncate">
                   {index + 1}. {artist.name}
                 </span>
-                <span>
+                <span className="truncate">
                   {artist.timesPlayed}{" "}
                   {artist.timesPlayed === 1 ? "play" : "plays"}
                 </span>

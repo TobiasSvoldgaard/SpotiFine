@@ -14,7 +14,7 @@ export default function MusicOverview({
 }: Props): JSX.Element {
   return (
     <>
-      <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl p-12 text-center text-2xl font-bold flex flex-col items-center justify-center overflow-hidden">
+      <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl px-9 py-6 text-center text-2xl font-bold flex flex-col items-center justify-center overflow-hidden">
         <h1>You&apos;ve listened to {totalSongsPlayed} songs</h1>
         <br />
         <h1>
