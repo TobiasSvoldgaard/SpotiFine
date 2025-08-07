@@ -236,8 +236,8 @@ export default function Home() {
             Step 3 - Explore your listening habits
           </h1>
           <p className="text-neutral-400">
-            If you&apos;re ready to view your data, please click the button
-            below to proceed. Don&apos;t worry, your data is processed locally,
+            If you&apos;re ready to view your statistics, click the button below
+            to continue. Don&apos;t worry, your data is processed locally,
             entirely in your browser, and is never stored or shared anywhere
             else.
           </p>
@@ -280,16 +280,29 @@ export default function Home() {
                         }
                         mostPlayedSong={statistics.mostPlayedSongs[0]}
                       />
+
+                      {/* TopSongs shows before TopArtists on mobile */}
+                      <div className="block md:hidden">
+                        <TopSongs
+                          mostPlayedSongs={statistics.mostPlayedSongs}
+                          selectedSongId={selectedSongId}
+                          setSelectedSongId={setSelectedSongId}
+                        />
+                      </div>
+
                       <TopArtists
                         mostPlayedArtists={statistics.mostPlayedArtists}
                       />
                     </div>
 
-                    <TopSongs
-                      mostPlayedSongs={statistics.mostPlayedSongs}
-                      selectedSongId={selectedSongId}
-                      setSelectedSongId={setSelectedSongId}
-                    />
+                    {/* TopSongs only visible on md and up */}
+                    <div className="hidden md:block">
+                      <TopSongs
+                        mostPlayedSongs={statistics.mostPlayedSongs}
+                        selectedSongId={selectedSongId}
+                        setSelectedSongId={setSelectedSongId}
+                      />
+                    </div>
 
                     <TopAlbums mostPlayedAlbums={statistics.mostPlayedAlbums} />
                     <SongsByDay
