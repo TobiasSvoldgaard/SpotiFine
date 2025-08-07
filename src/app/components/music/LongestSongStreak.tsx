@@ -13,9 +13,9 @@ export default function LongestSongStreak({
     useState<number>(10);
   return (
     <>
-      <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl px-4 overflow-hidden">
-        <div className="h-100 overflow-y-auto p-8">
-          <h1 className="text-2xl font-bold">Longest Listening Streaks</h1>
+      <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl px-3 overflow-hidden">
+        <div className="h-100 overflow-y-auto p-6">
+          <h1 className="text-2xl font-bold mb-4">Longest Listening Streaks</h1>
           {longestSongStreak
             .slice(0, numberOfStreaksToShow)
             .map((streak, index) => (

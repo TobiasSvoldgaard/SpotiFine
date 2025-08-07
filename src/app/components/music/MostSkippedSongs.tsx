@@ -3,22 +3,31 @@ import { song } from "@/app/utils/types";
 
 type Props = {
   mostPlayedSongs: song[];
+  setSelectedSongId: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function MostSkippedSongs({
   mostPlayedSongs,
+  setSelectedSongId,
 }: Props): JSX.Element {
   const [showMore, setShowMore] = useState(false);
   const [numberOfSongsToShow, setNumberOfSongsToShow] = useState<number>(10);
   return (
     <>
-      <div className="w-[100%] bg-[#0f9516] rounded-2xl px-4 overflow-hidden mt-4">
-        <div className="h-100 overflow-y-auto p-8">
-          <h1 className="text-2xl font-bold">Most Skipped Songs</h1>
+      <div className="w-[100%] bg-[#0f9516] rounded-2xl px-3 overflow-hidden">
+        <div className="h-100 overflow-y-auto p-6">
+          <h1 className="text-2xl font-bold mb-4">Most Skipped Songs</h1>
           {mostPlayedSongs.slice(0, numberOfSongsToShow).map((song, index) => (
             <div key={index} className="flex justify-between">
-              <span className="w-[40%] truncate">
-                {index + 1}. {song.title} - {song.artist}
+              <span
+                className="w-[40%] hover:underline cursor-pointer truncate "
+                onClick={() => {
+                  setSelectedSongId(song.id);
+                }}
+              >
+                <a href="#spotifySongEmbed">
+                  {index + 1}. {song.title} - {song.artist}
+                </a>
               </span>
               <span className="w-[20%] text-center">
                 {song.timesSkipped} {song.timesSkipped === 1 ? "skip" : "skips"}

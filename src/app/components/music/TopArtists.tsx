@@ -11,9 +11,9 @@ export default function TopAlbums({ mostPlayedArtists }: Props): JSX.Element {
     useState<number>(10);
   return (
     <>
-      <div className="w-[100%] bg-[#0f9516] rounded-2xl px-4 overflow-hidden">
-        <div className="h-100 overflow-y-auto p-8">
-          <h1 className="text-2xl font-bold">Top Artists</h1>
+      <div className="w-[100%] bg-[#0f9516] rounded-2xl px-3 overflow-hidden">
+        <div className="h-100 overflow-y-auto p-6">
+          <h1 className="text-2xl font-bold mb-4">Top Artists</h1>
           {mostPlayedArtists
             .slice(0, numberOfArtistsToShow)
             .map((artist, index) => (

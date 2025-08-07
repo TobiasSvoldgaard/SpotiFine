@@ -10,9 +10,13 @@ body {
   scrollbar-width: thin;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .fileDropZone {
   width: 100%;
-  height: 25vh;
+  height: 320;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +33,7 @@ body {
   text-align: center;
 }
 
-a {
+.linkStyle {
   color: #0f9516;
   text-decoration: underline;
 }
@@ -48,6 +52,20 @@ input[type="file"] {
   width: 60%;
   min-height: 100vh;
   background: #121212;
+}
+
+@media (max-width: 768px) {
+  .sideColumn {
+    display: none;
+  }
+
+  .centerColumn {
+    width: 100%;
+  }
+
+  .layout {
+    flex-direction: column;
+  }
 }
 
 .row:after {

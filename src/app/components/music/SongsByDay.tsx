@@ -14,18 +14,16 @@ export default function SongsByDay({
 
   return (
     <>
-      <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl px-12 py-8 overflow-hidden">
-        <h1 className="text-2xl font-bold">Songs by Day</h1>
-        <br />
-        <div className="flex gap-4 w-full">
+      <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl px-9 py-6 overflow-hidden">
+        <h1 className="text-2xl font-bold mb-4">Songs by Day</h1>
+        <div className="flex gap-1 w-full">
           {days.map((day) => (
             <div
               key={day}
               className="flex-1 flex flex-col items-center"
               style={{ minWidth: "8px", flex: "1 1 0" }}
             >
-              {/* Fixed height container for bar */}
-              <div className="h-50 w-full flex items-end">
+              <div className="h-60 w-full flex items-end">
                 <div
                   className="w-full bg-white hover:bg-neutral-300 transition duration-100 rounded-lg"
                   title={`${songsByDay[day]} plays`}

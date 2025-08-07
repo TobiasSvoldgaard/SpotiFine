@@ -26,6 +26,7 @@ export default function Home() {
   const [statistics, setStatistics] = useState<statistics | null>(null);
   const [showProceedButton, setShowProceedButton] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [selectedSongId, setSelectedSongId] = useState<string>("");
 
   const fileUploadRef = useRef<HTMLInputElement>(null);
 
@@ -41,6 +42,12 @@ export default function Home() {
       alert("An error has occured");
     }
   };
+
+  useEffect(() => {
+    if (statistics?.mostPlayedSongs.length && selectedSongId === "") {
+      setSelectedSongId(statistics.mostPlayedSongs[0].id);
+    }
+  }, [statistics, selectedSongId]);
 
   useEffect(() => {
     const fileDropZone = document.getElementById("fileDropZone");
@@ -98,7 +105,7 @@ export default function Home() {
         <div className="sideColumn">
           <br />
         </div>
-        <div className="relative centerColumn px-32 pb-[50vh]">
+        <div className="relative centerColumn px-[5%] pb-[25vh]">
           <header className="flex item-center text-end my-8">
             <Image
               className="cursor-pointer ml-auto"
@@ -119,7 +126,11 @@ export default function Home() {
             Spotify allows you to request and download a copy of your personal
             data, which includes a detailed record of your entire listening
             history. You can request your Spotify data{" "}
-            <a href="https://www.spotify.com/account/privacy/" target="_blank">
+            <a
+              className="linkStyle"
+              href="https://www.spotify.com/account/privacy/"
+              target="_blank"
+            >
               here
             </a>
             , and once it&apos;s ready, you will receive a download link via
@@ -214,34 +225,48 @@ export default function Home() {
                 <>
                   <h1 className="text-2xl font-bold">Music</h1>
                   <div className="grid grid-cols-2 gap-4">
-                    <MusicOverview
-                      totalSongsPlayed={statistics.totalSongsPlayed}
-                      totalSongListeningTime={statistics.totalSongListeningTime}
-                      mostPlayedSong={statistics.mostPlayedSongs[0]}
+                    <div className="flex flex-col gap-4">
+                      <MusicOverview
+                        totalSongsPlayed={statistics.totalSongsPlayed}
+                        totalSongListeningTime={
+                          statistics.totalSongListeningTime
+                        }
+                        mostPlayedSong={statistics.mostPlayedSongs[0]}
+                      />
+                      <TopArtists
+                        mostPlayedArtists={statistics.mostPlayedArtists}
+                      />
+                    </div>
+
+                    <TopSongs
+                      mostPlayedSongs={statistics.mostPlayedSongs}
+                      selectedSongId={selectedSongId}
+                      setSelectedSongId={setSelectedSongId}
                     />
-                    <TopSongs mostPlayedSongs={statistics.mostPlayedSongs} />
-                    <TopArtists
-                      mostPlayedArtists={statistics.mostPlayedArtists}
-                    />
+
                     <TopAlbums mostPlayedAlbums={statistics.mostPlayedAlbums} />
                     <SongsByDay
                       songsByDay={statistics.songsByDay}
                       totalSongsPlayed={statistics.totalSongsPlayed}
                     />
-                    <SongsByHour songsByHour={statistics.songsByHour} />
-
+                    <div className="col-span-2">
+                      <SongsByHour songsByHour={statistics.songsByHour} />
+                    </div>
                     <LongestSongStreak
                       longestSongStreak={statistics.longestSongStreak}
                     />
                     <LongestSongSession
                       longestSongSession={statistics.longestSongSession}
                     />
+                    <div className="col-span-2">
+                      <MostSkippedSongs
+                        mostPlayedSongs={statistics.mostPlayedSongs
+                          .filter((song) => song.timesSkipped > 0)
+                          .sort((a, b) => b.timesSkipped - a.timesSkipped)}
+                        setSelectedSongId={setSelectedSongId}
+                      />
+                    </div>
                   </div>
-                  <MostSkippedSongs
-                    mostPlayedSongs={statistics.mostPlayedSongs
-                      .filter((song) => song.timesSkipped > 0)
-                      .sort((a, b) => b.timesSkipped - a.timesSkipped)}
-                  />
                 </>
               )}
               <br />

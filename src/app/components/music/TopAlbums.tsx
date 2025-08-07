@@ -10,9 +10,9 @@ export default function TopAlbums({ mostPlayedAlbums }: Props): JSX.Element {
   const [numberOfAlbumsToShow, setNumberOfAlbumsToShow] = useState<number>(10);
   return (
     <>
-      <div className="w-[100%] bg-[#0f9516] rounded-2xl px-4 overflow-hidden">
-        <div className="h-100 overflow-y-auto p-8">
-          <h1 className="text-2xl font-bold">Top Albums</h1>
+      <div className="w-[100%] bg-[#0f9516] rounded-2xl px-3 overflow-hidden">
+        <div className="h-100 overflow-y-auto p-6">
+          <h1 className="text-2xl font-bold mb-4">Top Albums</h1>
           {mostPlayedAlbums
             .slice(0, numberOfAlbumsToShow)
             .map((album, index) => (
