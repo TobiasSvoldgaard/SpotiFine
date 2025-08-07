@@ -2,6 +2,7 @@ import JSZip from "jszip";
 import {
   album,
   artist,
+  country,
   media,
   podcast,
   session,
@@ -13,6 +14,7 @@ import {
 export default async function getStats(userData: File): Promise<statistics> {
   const zip = await JSZip.loadAsync(userData);
   const subfolder = "Spotify Extended Streaming History/";
+  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
   const songListeningHistory: media[] = [];
   const podcastListeningHistory: media[] = [];
@@ -40,6 +42,8 @@ export default async function getStats(userData: File): Promise<statistics> {
   const songsByHour = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   ];
+  const songsByCountryMap = new Map<string, country>();
+
 
   const fileEntries = Object.entries(zip.files);
 
@@ -153,6 +157,15 @@ export default async function getStats(userData: File): Promise<statistics> {
         artist: song.master_metadata_album_artist_name,
         timesPlayed: 0,
       });
+    }
+
+    const songCountry =
+      song.conn_country === "ZZ"
+        ? "Unknown country"
+        : regionNames.of(song.conn_country) || "Unknown country";
+
+    if (!songsByCountryMap.has(songCountry)) {
+      songsByCountryMap.set(songCountry, { name: songCountry, timesPlayed: 0 });
     }
 
     // Update count.
@@ -279,6 +292,7 @@ export default async function getStats(userData: File): Promise<statistics> {
   const mostPlayedArtists = Array.from(mostPlayedArtistMap.values());
   const mostPlayedAlbums = Array.from(mostPlayedAlbumsMap.values());
   const mostPlayedPodcasts = Array.from(mostPlayedPodcastsMap.values());
+  const songsByCountry = Array.from(songsByCountryMap.values());
 
   mostPlayedSongs.sort((a, b) => b.timesPlayed - a.timesPlayed);
   mostPlayedArtists.sort((a, b) => b.timesPlayed - a.timesPlayed);
@@ -286,6 +300,11 @@ export default async function getStats(userData: File): Promise<statistics> {
   mostPlayedPodcasts.sort((a, b) => b.timesPlayed - a.timesPlayed);
   longestSongStreak.sort((a, b) => b.length - a.length);
   longestSongSession.sort((a, b) => b.length - a.length);
+  songsByCountry.sort((a, b) => {
+    if (a.name === "Unknown country") return 1;
+    if (b.name === "Unknown country") return -1;
+    return b.timesPlayed - a.timesPlayed;
+  });
 
   return {
     totalSongsPlayed: songListeningHistory.length,
@@ -302,6 +321,7 @@ export default async function getStats(userData: File): Promise<statistics> {
     songsByHour,
     longestSongStreak,
     longestSongSession,
+    songsByCountry,
   };
 }
 

@@ -66,6 +66,11 @@ export type session = {
   songs: song[];
 };
 
+export type country = {
+  name: string;
+  timesPlayed: number;
+};
+
 export type statistics = {
   totalSongsPlayed: number;
   totalPodcastEpisodesPlayed: number;
@@ -81,4 +86,5 @@ export type statistics = {
   songsByHour: number[];
   longestSongStreak: streak[];
   longestSongSession: session[];
+  songsByCountry: country[];
 };

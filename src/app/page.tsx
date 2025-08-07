@@ -16,6 +16,7 @@ import SongsByHour from "./components/music/SongsByHour";
 import MostSkippedSongs from "./components/music/MostSkippedSongs";
 import LongestSongStreak from "./components/music/LongestSongStreak";
 import LongestSongSession from "./components/music/LongestSongSession";
+import SongsByCountry from "./components/music/SongsByCountry";
 import NeverSkipped from "./components/music/NeverSkipped";
 import Spinner from "./components/Spinner";
 import Copyright from "./components/Copyright";
@@ -142,6 +143,7 @@ export default function Home() {
             <li>Longest daily listening streaks</li>
             <li>Longest uninterrupted listening sessions</li>
             <li>Most skipped songs and their skip rate</li>
+            <li>Total songs played by country</li>
           </ul>
           <br />
           <h2 className="text-xl font-bold">Podcasts</h2>
@@ -312,6 +314,9 @@ export default function Home() {
                     ) : (
                       <NeverSkipped />
                     )}
+                    <SongsByCountry
+                      songsByCountry={statistics.songsByCountry}
+                    />
                   </div>
                 </>
               )}
