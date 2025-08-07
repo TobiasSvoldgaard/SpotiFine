@@ -120,7 +120,41 @@ export default function Home() {
             </h1>
           </header>
           <h1 className="text-2xl font-bold">What is SpotiFine?</h1>
-          <p className="text-neutral-400">blah blah blah</p>
+          <p className="text-neutral-400">
+            SpotiFine is a web app that let&apos;s you explore your Spotify
+            listening habits and history. Your data is turned into simple
+            breakdowns of your Spotify activity, which highlight your top
+            tracks, favorite artists, and listening trends over time. Below you
+            will find a full list of the insights and statistics SpotiFine
+            provides.
+          </p>
+          <br />
+          <h2 className="text-xl font-bold">Music</h2>
+          <ul className="list-disc list-inside text-neutral-400">
+            <li>Total songs listened to</li>
+            <li>Total hours spent listening to music</li>
+            <li>Most played songs</li>
+            <li>Most played albums</li>
+            <li>Most played artists</li>
+            <li>Total songs played by day of the week</li>
+            <li>Total songs played by hour of the day</li>
+            <li>Longest daily listening streaks</li>
+            <li>Longest uninterrupted listening sessions</li>
+            <li>Most skipped songs and their skip rate</li>
+          </ul>
+          <br />
+          <h2 className="text-xl font-bold">Podcasts</h2>
+          <ul className="list-disc list-inside text-neutral-400">
+            <li>Total episodes listened to</li>
+            <li>Total hours spent listening</li>
+            <li>Most played podcast</li>
+            <li>WIP</li>
+          </ul>
+          <br />
+          <h2 className="text-xl font-bold">Audiobooks</h2>
+          <ul className="list-disc list-inside text-neutral-400">
+            <li>WIP</li>
+          </ul>
           <br />
           <h1 className="text-2xl font-bold">
             Step 1 - Download your Spotify data
