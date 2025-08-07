@@ -2,9 +2,9 @@
 
 SpotiFine is an application that allows you to view and explore your Spotify listening habits and history.
 
-Check it out here: https://spotifine.vercel.app/
+Try it out here: https://spotifine.vercel.app/
 
-Currently, you are able to see the following:
+The following statistics are currently available:
 
 ### 🎵 Music
 - Total songs listened to
@@ -17,6 +17,7 @@ Currently, you are able to see the following:
 - Longest daily listening streaks
 - Longest uninterrupted listening sessions
 - Most skipped songs and their skip rate
+- Total songs played by country
 
 ### 🎤 Podcasts
 - Total episodes listened to
