@@ -4,11 +4,13 @@ import { song } from "@/app/utils/types";
 type Props = {
   mostPlayedSongs: song[];
   setSelectedSongId: React.Dispatch<React.SetStateAction<string>>;
+  embedSuffix: string;
 };
 
 export default function MostSkippedSongs({
   mostPlayedSongs,
   setSelectedSongId,
+  embedSuffix,
 }: Props): JSX.Element {
   const [showMore, setShowMore] = useState(false);
   const [numberOfSongsToShow, setNumberOfSongsToShow] = useState<number>(10);
@@ -23,11 +25,12 @@ export default function MostSkippedSongs({
                 className="w-[40%] hover:underline cursor-pointer truncate "
                 onClick={() => {
                   setSelectedSongId(song.id);
+                  document
+                    .getElementById(`spotifySongEmbed${embedSuffix}`)
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                <a href="#spotifySongEmbed">
-                  {index + 1}. {song.title} - {song.artist}
-                </a>
+                {index + 1}. {song.title} - {song.artist}
               </span>
               <span className="w-[20%] text-center truncate">
                 {song.timesSkipped} {song.timesSkipped === 1 ? "skip" : "skips"}

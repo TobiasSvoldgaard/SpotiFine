@@ -281,13 +281,16 @@ export default function Home() {
                         mostPlayedSong={statistics.mostPlayedSongs[0]}
                       />
 
-                      {/* TopSongs shows before TopArtists on mobile */}
+                      {/* TopSongs shows before TopArtists on mobile. */}
                       <div className="block md:hidden">
-                        <TopSongs
-                          mostPlayedSongs={statistics.mostPlayedSongs}
-                          selectedSongId={selectedSongId}
-                          setSelectedSongId={setSelectedSongId}
-                        />
+                        {selectedSongId && (
+                          <TopSongs
+                            mostPlayedSongs={statistics.mostPlayedSongs}
+                            selectedSongId={selectedSongId}
+                            setSelectedSongId={setSelectedSongId}
+                            embedSuffix="Mobile"
+                          />
+                        )}
                       </div>
 
                       <TopArtists
@@ -295,20 +298,25 @@ export default function Home() {
                       />
                     </div>
 
-                    {/* TopSongs only visible on md and up */}
+                    {/* TopSongs only visible on desktop. */}
                     <div className="hidden md:block">
-                      <TopSongs
-                        mostPlayedSongs={statistics.mostPlayedSongs}
-                        selectedSongId={selectedSongId}
-                        setSelectedSongId={setSelectedSongId}
-                      />
+                      {selectedSongId && (
+                        <TopSongs
+                          mostPlayedSongs={statistics.mostPlayedSongs}
+                          selectedSongId={selectedSongId}
+                          setSelectedSongId={setSelectedSongId}
+                          embedSuffix="Desktop"
+                        />
+                      )}
                     </div>
 
                     <TopAlbums mostPlayedAlbums={statistics.mostPlayedAlbums} />
+
                     <SongsByDay
                       songsByDay={statistics.songsByDay}
                       totalSongsPlayed={statistics.totalSongsPlayed}
                     />
+
                     <div className="md:col-span-2">
                       <SongsByHour songsByHour={statistics.songsByHour} />
                     </div>
@@ -322,18 +330,34 @@ export default function Home() {
                         longestSongSession={statistics.longestSongSession}
                       />
                     )}
+
+                    {/* MostSkippedSongs suffix depends on device. */}
                     {statistics.numberOfSkippedSongs > 0 ? (
-                      <div className="md:col-span-2">
-                        <MostSkippedSongs
-                          mostPlayedSongs={statistics.mostPlayedSongs
-                            .filter((song) => song.timesSkipped > 0)
-                            .sort((a, b) => b.timesSkipped - a.timesSkipped)}
-                          setSelectedSongId={setSelectedSongId}
-                        />
-                      </div>
+                      <>
+                        <div className="block md:hidden md:col-span-2">
+                          <MostSkippedSongs
+                            mostPlayedSongs={statistics.mostPlayedSongs
+                              .filter((song) => song.timesSkipped > 0)
+                              .sort((a, b) => b.timesSkipped - a.timesSkipped)}
+                            setSelectedSongId={setSelectedSongId}
+                            embedSuffix="Mobile"
+                          />
+                        </div>
+
+                        <div className="hidden md:block md:col-span-2">
+                          <MostSkippedSongs
+                            mostPlayedSongs={statistics.mostPlayedSongs
+                              .filter((song) => song.timesSkipped > 0)
+                              .sort((a, b) => b.timesSkipped - a.timesSkipped)}
+                            setSelectedSongId={setSelectedSongId}
+                            embedSuffix="Desktop"
+                          />
+                        </div>
+                      </>
                     ) : (
                       <NeverSkipped />
                     )}
+
                     <SongsByCountry
                       songsByCountry={statistics.songsByCountry}
                     />

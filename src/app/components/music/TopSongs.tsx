@@ -5,20 +5,22 @@ type Props = {
   mostPlayedSongs: song[];
   selectedSongId: string;
   setSelectedSongId: React.Dispatch<React.SetStateAction<string>>;
+  embedSuffix: string;
 };
 
 export default function TopSongs({
   mostPlayedSongs,
   selectedSongId,
   setSelectedSongId,
+  embedSuffix,
 }: Props): JSX.Element {
   const [showMore, setShowMore] = useState(false);
   const [numberOfSongsToShow, setNumberOfSongsToShow] = useState<number>(10);
 
   return (
     <>
-      <div className="w-[100%] bg-[#0f9516] rounded-2xl px-3 overflow-hidden">
-        <div id="spotifySongEmbed" className="h-100 p-6 mb-4">
+      <div className="w-[100%] bg-[#0f9516] rounded-2xl px-3 overflow-y-auto">
+        <div id={`spotifySongEmbed${embedSuffix}`} className="h-100 p-6 mb-4">
           <iframe
             data-testid="embed-iframe"
             style={{ borderRadius: "12px" }}
@@ -39,11 +41,12 @@ export default function TopSongs({
                 className="w-[70%] hover:underline cursor-pointer truncate"
                 onClick={() => {
                   setSelectedSongId(song.id);
+                  document
+                    .getElementById(`spotifySongEmbed${embedSuffix}`)
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                <a href="#spotifySongEmbed">
-                  {index + 1}. {song.title} - {song.artist}
-                </a>
+                {index + 1}. {song.title} - {song.artist}
               </span>
               <span className="truncate">
                 {song.timesPlayed} {song.timesPlayed === 1 ? "play" : "plays"}
