@@ -18,13 +18,17 @@ export default function MusicOverview({
         <h1>You&apos;ve listened to {totalSongsPlayed} songs</h1>
         <br />
         <h1>
-          You&apos;ve spent {(totalSongListeningTime / 3600000).toFixed(2)}{" "}
-          hours listening to music
+          You&apos;ve spent{" "}
+          {totalSongListeningTime < 3600000
+            ? (totalSongListeningTime / 60000).toFixed(2) + " minutes"
+            : (totalSongListeningTime / 3600000).toFixed(2) + " hours"}{" "}
+          listening to music
         </h1>
         <br />
         <h1>
           Your most played song is {mostPlayedSong.title} by{" "}
-          {mostPlayedSong.artist} with {mostPlayedSong.timesPlayed} plays
+          {mostPlayedSong.artist} with {mostPlayedSong.timesPlayed}{" "}
+          {mostPlayedSong.timesPlayed > 1 ? "plays" : "play"}
         </h1>
       </div>
     </>
