@@ -108,16 +108,16 @@ export default function Home() {
           <br />
         </div>
         <div className="relative centerColumn px-[5%] pb-[25vh]">
-          <header className="flex item-center text-end my-8">
+          <header className="flex items-center w-full my-8 px-4 overflow-x-hidden">
             <Image
-              className="cursor-pointer ml-auto"
+              className="cursor-pointer ml-auto w-12 h-12 sm:w-20 sm:h-20 md:w-24 md:h-24"
               onClick={() => location.reload()}
               src="/SpotiFineLogo.png"
-              width={96}
-              height={96}
+              width={128}
+              height={128}
               alt="SpotiFine logo"
             />
-            <h1 className="text-6xl font-bold ml-4 my-auto mr-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold ml-4 my-auto mr-auto">
               SpotiFine
             </h1>
           </header>
