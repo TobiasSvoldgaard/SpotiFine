@@ -196,7 +196,7 @@ export default function Home() {
             <p>or</p>
             <br />
             <label
-              className="bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer px-8 py-4 rounded-lg select-none"
+              className="bg-[#0F9516] hover:bg-[#13bf1c] transition duration-100 cursor-pointer px-8 py-4 rounded-lg select-none"
               htmlFor="fileUpload"
             >
               Choose file
@@ -247,7 +247,7 @@ export default function Home() {
               <button
                 className={`${
                   fileUploadSize > 0
-                    ? "bg-[#0F9516] hover:bg-[#13bf1c] cursor-pointer"
+                    ? "bg-[#0F9516] hover:bg-[#13bf1c] transition duration-100 cursor-pointer"
                     : "bg-[#707070]"
                 } px-8 py-4 rounded-lg select-none`}
                 onClick={() => {
@@ -397,7 +397,7 @@ export default function Home() {
           <div className="proceedButton">
             {!showProceedButton && !loading && (
               <button
-                className="bg-white hover:bg-neutral-300 text-black cursor-pointer px-8 py-4 rounded-lg select-none"
+                className="bg-white hover:bg-neutral-300 transition duration-100 text-black cursor-pointer px-8 py-4 rounded-lg select-none"
                 onClick={() => {
                   setShowProceedButton(!showProceedButton);
                   setFileUploadName("");
