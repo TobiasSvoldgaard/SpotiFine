@@ -14,7 +14,7 @@ export default function SongsByHour({ songsByHour }: Props): JSX.Element {
   return (
     <>
       <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl px-9 py-6 overflow-hidden">
-        <h1 className="text-2xl font-bold">Songs by Hour</h1>
+        <h1 className="text-2xl font-bold mb-4">Songs by Hour</h1>
         <div className="flex gap-1 w-full">
           {hours.map((hour) => (
             <div

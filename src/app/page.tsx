@@ -113,9 +113,10 @@ export default function Home() {
               className="cursor-pointer ml-auto w-12 h-12 sm:w-20 sm:h-20 md:w-24 md:h-24"
               onClick={() => location.reload()}
               src="/SpotiFineLogo.png"
-              width={128}
-              height={128}
+              width={96}
+              height={96}
               alt="SpotiFine logo"
+              priority
             />
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold ml-4 my-auto mr-auto">
               SpotiFine
@@ -196,7 +197,7 @@ export default function Home() {
             <p>or</p>
             <br />
             <label
-              className="bg-[#0F9516] hover:bg-[#13bf1c] transition duration-100 cursor-pointer px-8 py-4 rounded-lg select-none"
+              className="bg-[#0f9516] hover:bg-[#13bf1c] transition duration-100 cursor-pointer px-8 py-4 rounded-lg select-none"
               htmlFor="fileUpload"
             >
               Choose file
@@ -247,7 +248,7 @@ export default function Home() {
               <button
                 className={`${
                   fileUploadSize > 0
-                    ? "bg-[#0F9516] hover:bg-[#13bf1c] transition duration-100 cursor-pointer"
+                    ? "bg-[#0f9516] hover:bg-[#13bf1c] transition duration-100 cursor-pointer"
                     : "bg-[#707070]"
                 } px-8 py-4 rounded-lg select-none`}
                 onClick={() => {
