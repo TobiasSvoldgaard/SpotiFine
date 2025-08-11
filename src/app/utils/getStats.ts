@@ -171,7 +171,7 @@ export default async function getStats(userData: File): Promise<statistics> {
 
     // Update count.
     mostPlayedSongsMap.get(song.spotify_track_uri)!.timesPlayed += 1;
-    if (song.skipped) {
+    if (song.skipped || song.reason_end !== "trackdone") {
       mostPlayedSongsMap.get(song.spotify_track_uri)!.timesSkipped += 1;
       numberOfSkippedSongs += 1;
     }
