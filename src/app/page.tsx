@@ -18,6 +18,7 @@ import LongestSongStreak from "./components/music/LongestSongStreak";
 import LongestSongSession from "./components/music/LongestSongSession";
 import SongsByCountry from "./components/music/SongsByCountry";
 import NeverSkipped from "./components/music/NeverSkipped";
+import MusicTimePeriod from "./components/music/MusicTimePeriod";
 import Spinner from "./components/Spinner";
 import Copyright from "./components/Copyright";
 
@@ -273,6 +274,17 @@ export default function Home() {
                 <>
                   <h1 className="text-2xl font-bold">Music</h1>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="md:col-span-2">
+                      <MusicTimePeriod
+                        firstSongTimestamp={
+                          new Date(statistics.firstSongTimestamp)
+                        }
+                        lastSongTimestamp={
+                          new Date(statistics.lastSongTimestamp)
+                        }
+                      />
+                    </div>
+
                     <div className="flex flex-col gap-4">
                       <MusicOverview
                         totalSongsPlayed={statistics.totalSongsPlayed}

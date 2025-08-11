@@ -88,4 +88,6 @@ export type statistics = {
   longestSongSession: session[];
   songsByCountry: country[];
   numberOfSkippedSongs: number;
+  firstSongTimestamp: string;
+  lastSongTimestamp: string;
 };

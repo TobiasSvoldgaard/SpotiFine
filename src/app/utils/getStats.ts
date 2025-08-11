@@ -329,6 +329,8 @@ export default async function getStats(userData: File): Promise<statistics> {
     longestSongSession,
     songsByCountry,
     numberOfSkippedSongs,
+    firstSongTimestamp: songListeningHistory[0].ts,
+    lastSongTimestamp: songListeningHistory[songListeningHistory.length - 1].ts,
   };
 }
 
