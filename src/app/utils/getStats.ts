@@ -140,7 +140,8 @@ export default async function getStats(userData: File): Promise<statistics> {
         artist: song.master_metadata_album_artist_name,
         album: song.master_metadata_album_album_name,
         timesPlayed: 0,
-        timesSkipped: 0,
+        timesDirectlySkipped: 0,
+        timesIndirectlySkipped: 0,
         id: song.spotify_track_uri.substring(14),
       });
     }
@@ -171,9 +172,19 @@ export default async function getStats(userData: File): Promise<statistics> {
 
     // Update count.
     mostPlayedSongsMap.get(song.spotify_track_uri)!.timesPlayed += 1;
-    if (song.skipped || song.reason_end !== "trackdone") {
-      mostPlayedSongsMap.get(song.spotify_track_uri)!.timesSkipped += 1;
+    const indirectSkipReasons = new Set([
+      "fwdbtn",
+      "backbtn",
+      "remote",
+      "logout",
+    ]);
+    if (song.skipped) {
+      mostPlayedSongsMap.get(song.spotify_track_uri)!.timesDirectlySkipped += 1;
       numberOfSkippedSongs += 1;
+    } else if (indirectSkipReasons.has(song.reason_end)) {
+      mostPlayedSongsMap.get(
+        song.spotify_track_uri
+      )!.timesIndirectlySkipped += 1;
     }
     mostPlayedArtistMap.get(
       song.master_metadata_album_artist_name
@@ -223,7 +234,8 @@ export default async function getStats(userData: File): Promise<statistics> {
             artist: previousSong.master_metadata_album_artist_name,
             album: previousSong.master_metadata_album_album_name,
             timesPlayed: 0,
-            timesSkipped: 0,
+            timesDirectlySkipped: 0,
+            timesIndirectlySkipped: 0,
             id: previousSong.spotify_track_uri.substring(14),
           });
           sessionStartTime = new Date(previousSong.ts).getTime();
@@ -235,7 +247,8 @@ export default async function getStats(userData: File): Promise<statistics> {
           artist: song.master_metadata_album_artist_name,
           album: song.master_metadata_album_album_name,
           timesPlayed: 0,
-          timesSkipped: 0,
+          timesDirectlySkipped: 0,
+          timesIndirectlySkipped: 0,
           id: song.spotify_track_uri.substring(14),
         });
       } else {

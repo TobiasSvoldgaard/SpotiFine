@@ -33,7 +33,8 @@ export type song = {
   artist: string;
   album: string;
   timesPlayed: number;
-  timesSkipped: number;
+  timesDirectlySkipped: number;
+  timesIndirectlySkipped: number;
   id: string;
 };
 

@@ -350,8 +350,18 @@ export default function Home() {
                         <div className="block md:hidden md:col-span-2">
                           <MostSkippedSongs
                             mostPlayedSongs={statistics.mostPlayedSongs
-                              .filter((song) => song.timesSkipped > 0)
-                              .sort((a, b) => b.timesSkipped - a.timesSkipped)}
+                              .filter(
+                                (song) =>
+                                  song.timesDirectlySkipped > 0 ||
+                                  song.timesIndirectlySkipped > 0
+                              )
+                              .sort(
+                                (a, b) =>
+                                  b.timesDirectlySkipped +
+                                  b.timesIndirectlySkipped -
+                                  a.timesDirectlySkipped -
+                                  a.timesIndirectlySkipped
+                              )}
                             setSelectedSongId={setSelectedSongId}
                             embedSuffix="Mobile"
                           />
@@ -360,8 +370,18 @@ export default function Home() {
                         <div className="hidden md:block md:col-span-2">
                           <MostSkippedSongs
                             mostPlayedSongs={statistics.mostPlayedSongs
-                              .filter((song) => song.timesSkipped > 0)
-                              .sort((a, b) => b.timesSkipped - a.timesSkipped)}
+                              .filter(
+                                (song) =>
+                                  song.timesDirectlySkipped > 0 ||
+                                  song.timesIndirectlySkipped > 0
+                              )
+                              .sort(
+                                (a, b) =>
+                                  b.timesDirectlySkipped +
+                                  b.timesIndirectlySkipped -
+                                  a.timesDirectlySkipped -
+                                  a.timesIndirectlySkipped
+                              )}
                             setSelectedSongId={setSelectedSongId}
                             embedSuffix="Desktop"
                           />
