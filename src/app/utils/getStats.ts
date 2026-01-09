@@ -14,7 +14,6 @@ import {
 export default async function getStats(userData: File): Promise<statistics> {
   const zip = await JSZip.loadAsync(userData);
   const subfolder = "Spotify Extended Streaming History/";
-  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
   const songListeningHistory: media[] = [];
   const podcastListeningHistory: media[] = [];
@@ -161,10 +160,7 @@ export default async function getStats(userData: File): Promise<statistics> {
       });
     }
 
-    const songCountry =
-      song.conn_country === "ZZ"
-        ? "Unknown country"
-        : regionNames.of(song.conn_country) || "Unknown country";
+    const songCountry = getCountryName(song.conn_country);
 
     if (!songsByCountryMap.has(songCountry)) {
       songsByCountryMap.set(songCountry, { name: songCountry, timesPlayed: 0 });
@@ -368,4 +364,16 @@ function timeBetweenMedia(a: media, b: media) {
   }
 
   return Math.abs(firstPlayedEndTime - lastPlayedStartTime);
+}
+
+const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+
+function getCountryName(code?: string) {
+  if (!code || code === "ZZ") return "Unknown country";
+
+  try {
+    return regionNames.of(code) ?? "Unknown country";
+  } catch {
+    return "Unknown country";
+  }
 }
