@@ -72,6 +72,11 @@ export type country = {
   timesPlayed: number;
 };
 
+export enum dateButtonType {
+  increase,
+  decrease,
+}
+
 export type statistics = {
   totalSongsPlayed: number;
   totalPodcastEpisodesPlayed: number;
