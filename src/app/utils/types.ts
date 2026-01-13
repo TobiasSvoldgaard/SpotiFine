@@ -41,6 +41,8 @@ export type song = {
 export type artist = {
   name: string;
   timesPlayed: number;
+  timesDirectlySkipped: number;
+  timesIndirectlySkipped: number;
 };
 
 export type album = {

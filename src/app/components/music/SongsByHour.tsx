@@ -12,46 +12,44 @@ export default function SongsByHour({ songsByHour }: Props): JSX.Element {
   ];
 
   return (
-    <>
-      <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl px-9 py-6 overflow-hidden">
-        <h1 className="text-2xl font-bold mb-4">Songs by Hour</h1>
-        <div className="flex gap-1 w-full">
-          {hours.map((hour) => (
-            <div
-              key={hour}
-              className="flex-1 flex flex-col items-center"
-              style={{ minWidth: "8px", flex: "1 1 0" }}
-            >
-              <div className="h-65 w-full flex items-end">
-                <div
-                  className="w-full bg-white hover:bg-neutral-300 transition duration-100 rounded-md"
-                  title={`${songsByHour[hour]} plays`}
-                  style={{
-                    height: `${(songsByHour[hour] / mostPlays) * 100}%`,
-                  }}
-                ></div>
-              </div>
-
-              {[0, 3, 6, 9, 12, 15, 18, 21].includes(hour) && (
-                <span className="mt-3 text-sm text-white text-center">
-                  {
-                    {
-                      0: "12 AM",
-                      3: "3 AM",
-                      6: "6 AM",
-                      9: "9 AM",
-                      12: "12 PM",
-                      15: "3 PM",
-                      18: "6 PM",
-                      21: "9 PM",
-                    }[hour]
-                  }
-                </span>
-              )}
+    <div className="w-full h-100 bg-[#0d0d0d] rounded-[14px] px-9 py-6 overflow-hidden">
+      <h1 className="text-2xl font-bold mb-4">Songs by Hour</h1>
+      <div className="flex gap-1 w-full">
+        {hours.map((hour) => (
+          <div
+            key={hour}
+            className="flex-1 flex flex-col items-center"
+            style={{ minWidth: "8px", flex: "1 1 0" }}
+          >
+            <div className="h-66 w-full flex items-end">
+              <div
+                className="w-full bg-neutral-400 hover:bg-white transition duration-100 rounded-md"
+                title={`${songsByHour[hour]} plays`}
+                style={{
+                  height: `${(songsByHour[hour] / mostPlays) * 100}%`,
+                }}
+              ></div>
             </div>
-          ))}
-        </div>
+
+            {[0, 3, 6, 9, 12, 15, 18, 21].includes(hour) && (
+              <span className="mt-3 text-sm text-white text-center whitespace-nowrap">
+                {
+                  {
+                    0: "12 AM",
+                    3: "3 AM",
+                    6: "6 AM",
+                    9: "9 AM",
+                    12: "12 PM",
+                    15: "3 PM",
+                    18: "6 PM",
+                    21: "9 PM",
+                  }[hour]
+                }
+              </span>
+            )}
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }

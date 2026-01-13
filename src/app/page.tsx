@@ -108,7 +108,7 @@ export default function Home() {
         <div className="sideColumn">
           <br />
         </div>
-        <div className="relative centerColumn px-[5%] pb-[25vh]">
+        <div className="relative centerColumn px-[5%] pb-[50vh]">
           <header className="flex items-center w-full my-8 px-4 overflow-x-hidden">
             <Image
               className="cursor-pointer ml-auto w-12 h-12 sm:w-20 sm:h-20 md:w-24 md:h-24"

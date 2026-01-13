@@ -14,7 +14,7 @@ export default function DateControlButton({
   return (
     <button
       type="button"
-      className="rounded-full hover:bg-white hover:scale-110 transition duration-100 cursor-pointer"
+      className="rounded-full hover:bg-white text-white hover:text-black hover:scale-110 transition duration-100 cursor-pointer"
       {...props}
     >
       {dateControlButtontype === dateButtonType.increase ? (

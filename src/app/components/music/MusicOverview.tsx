@@ -13,24 +13,22 @@ export default function MusicOverview({
   mostPlayedSong,
 }: Props): JSX.Element {
   return (
-    <>
-      <div className="w-[100%] h-100 bg-[#0f9516] rounded-2xl px-9 py-6 text-center text-2xl font-bold flex flex-col items-center justify-center overflow-hidden">
-        <h1>You&apos;ve listened to {totalSongsPlayed} songs</h1>
-        <br />
-        <h1>
-          You&apos;ve spent{" "}
-          {totalSongListeningTime < 3600000
-            ? (totalSongListeningTime / 60000).toFixed(2) + " minutes"
-            : (totalSongListeningTime / 3600000).toFixed(2) + " hours"}{" "}
-          listening to music
-        </h1>
-        <br />
-        <h1>
-          Your most played song is {mostPlayedSong.title} by{" "}
-          {mostPlayedSong.artist} with {mostPlayedSong.timesPlayed}{" "}
-          {mostPlayedSong.timesPlayed > 1 ? "plays" : "play"}
-        </h1>
-      </div>
-    </>
+    <div className="w-full h-100 bg-[#0d0d0d] rounded-[14px] px-9 py-6 text-center text-2xl font-bold flex flex-col items-center justify-center overflow-hidden">
+      <h1>You&apos;ve listened to {totalSongsPlayed} songs</h1>
+      <br />
+      <h1>
+        You&apos;ve spent{" "}
+        {totalSongListeningTime < 3600000
+          ? (totalSongListeningTime / 60000).toFixed(2) + " minutes"
+          : (totalSongListeningTime / 3600000).toFixed(2) + " hours"}{" "}
+        listening to music
+      </h1>
+      <br />
+      <h1>
+        Your most played song is {mostPlayedSong.title} by{" "}
+        {mostPlayedSong.artist} with {mostPlayedSong.timesPlayed}{" "}
+        {mostPlayedSong.timesPlayed > 1 ? "plays" : "play"}
+      </h1>
+    </div>
   );
 }

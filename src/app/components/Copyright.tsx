@@ -3,7 +3,7 @@ import { JSX } from "react";
 export default function TopSongs(): JSX.Element {
   return (
     <>
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex items-center text-neutral-400 pr-2 pb-2">
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex items-center text-white pr-2 pb-2">
         <p>&copy; Tobias Svoldgaard</p>
         <a href="https://github.com/TobiasSvoldgaard/SpotiFine" target="_blank">
           <svg
@@ -11,8 +11,8 @@ export default function TopSongs(): JSX.Element {
             viewBox="0 0 98 96"
             width="18"
             height="18"
-            fill="#a1a1a1"
-            className="github-icon ml-2 my-auto cursor-pointer text-neutral-400"
+            fill="#ffffff"
+            className="github-icon ml-2 my-auto cursor-pointer text-white"
           >
             <path
               d="M49 .6C21.9.6 0 22.5 0 49.6c0 21.7 14.1 40.1 33.7 46.6 
