@@ -21,6 +21,7 @@ import NeverSkipped from "./components/music/NeverSkipped";
 import MusicTimePeriod from "./components/music/MusicTimePeriod";
 import Spinner from "./components/Spinner";
 import Copyright from "./components/Copyright";
+import MostSkippedArtists from "./components/music/MostSkippedArtists";
 
 export default function Home() {
   const [fileUploadName, setFileUploadName] = useState("");
@@ -145,6 +146,7 @@ export default function Home() {
             <li>Longest daily listening streaks</li>
             <li>Longest uninterrupted listening sessions</li>
             <li>Most skipped songs and their skip rate</li>
+            <li>Most skipped artists and their skip rate</li>
             <li>Total songs played by country</li>
           </ul>
           <br />
@@ -227,6 +229,9 @@ export default function Home() {
                 setStatistics(null);
                 setSelectedSongId("");
                 setShowProceedButton(true);
+                document
+                  .getElementById("viewDataButton")!
+                  .scrollIntoView({ behavior: "smooth" });
               }}
             />
           </div>
@@ -247,6 +252,7 @@ export default function Home() {
           <div className="proceedButton">
             {showProceedButton && (
               <button
+                id="viewDataButton"
                 className={`${
                   fileUploadSize > 0
                     ? "bg-[#0f9516] hover:bg-[#13bf1c] transition duration-100 cursor-pointer"
@@ -384,6 +390,42 @@ export default function Home() {
                               )}
                             setSelectedSongId={setSelectedSongId}
                             embedSuffix="Desktop"
+                          />
+                        </div>
+
+                        <div className="block md:hidden md:col-span-2">
+                          <MostSkippedArtists
+                            mostSkippedArtists={statistics.mostPlayedArtists
+                              .filter(
+                                (artist) =>
+                                  artist.timesDirectlySkipped > 0 ||
+                                  artist.timesIndirectlySkipped > 0
+                              )
+                              .sort(
+                                (a, b) =>
+                                  b.timesDirectlySkipped +
+                                  b.timesIndirectlySkipped -
+                                  a.timesDirectlySkipped -
+                                  a.timesIndirectlySkipped
+                              )}
+                          />
+                        </div>
+
+                        <div className="hidden md:block md:col-span-2">
+                          <MostSkippedArtists
+                            mostSkippedArtists={statistics.mostPlayedArtists
+                              .filter(
+                                (artist) =>
+                                  artist.timesDirectlySkipped > 0 ||
+                                  artist.timesIndirectlySkipped > 0
+                              )
+                              .sort(
+                                (a, b) =>
+                                  b.timesDirectlySkipped +
+                                  b.timesIndirectlySkipped -
+                                  a.timesDirectlySkipped -
+                                  a.timesIndirectlySkipped
+                              )}
                           />
                         </div>
                       </>

@@ -20,7 +20,7 @@ export default async function getStats(userData: File): Promise<statistics> {
   const audiobookListeningHistory: media[] = [];
 
   const mostPlayedSongsMap = new Map<string, song>();
-  const mostPlayedArtistMap = new Map<string, artist>();
+  const mostPlayedArtistsMap = new Map<string, artist>();
   const mostPlayedAlbumsMap = new Map<string, album>();
   const mostPlayedPodcastsMap = new Map<string, podcast>();
 
@@ -145,10 +145,12 @@ export default async function getStats(userData: File): Promise<statistics> {
       });
     }
 
-    if (!mostPlayedArtistMap.has(song.master_metadata_album_artist_name)) {
-      mostPlayedArtistMap.set(song.master_metadata_album_artist_name, {
+    if (!mostPlayedArtistsMap.has(song.master_metadata_album_artist_name)) {
+      mostPlayedArtistsMap.set(song.master_metadata_album_artist_name, {
         name: song.master_metadata_album_artist_name,
         timesPlayed: 0,
+        timesDirectlySkipped: 0,
+        timesIndirectlySkipped: 0,
       });
     }
 
@@ -175,14 +177,20 @@ export default async function getStats(userData: File): Promise<statistics> {
       "logout",
     ]);
     if (song.skipped) {
+      mostPlayedArtistsMap.get(
+        song.master_metadata_album_artist_name
+      )!.timesDirectlySkipped += 1;
       mostPlayedSongsMap.get(song.spotify_track_uri)!.timesDirectlySkipped += 1;
       numberOfSkippedSongs += 1;
     } else if (indirectSkipReasons.has(song.reason_end)) {
+      mostPlayedArtistsMap.get(
+        song.master_metadata_album_artist_name
+      )!.timesIndirectlySkipped += 1;
       mostPlayedSongsMap.get(
         song.spotify_track_uri
       )!.timesIndirectlySkipped += 1;
     }
-    mostPlayedArtistMap.get(
+    mostPlayedArtistsMap.get(
       song.master_metadata_album_artist_name
     )!.timesPlayed += 1;
     mostPlayedAlbumsMap.get(
@@ -303,7 +311,7 @@ export default async function getStats(userData: File): Promise<statistics> {
 
   // Convert maps to arrays.
   const mostPlayedSongs = Array.from(mostPlayedSongsMap.values());
-  const mostPlayedArtists = Array.from(mostPlayedArtistMap.values());
+  const mostPlayedArtists = Array.from(mostPlayedArtistsMap.values());
   const mostPlayedAlbums = Array.from(mostPlayedAlbumsMap.values());
   const mostPlayedPodcasts = Array.from(mostPlayedPodcastsMap.values());
   const songsByCountry = Array.from(songsByCountryMap.values());
